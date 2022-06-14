@@ -1,0 +1,19 @@
+{
+  "name": "estacionamiento",
+  "version": "1.0.0",
+  "description": "Servicio web para un estacionamiento",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luis-Campano/Estacionamiento.git"
+  },
+  "author": "Campano, Salas, Vazquez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luis-Campano/Estacionamiento/issues"
+  },
+  "homepage": "https://github.com/Luis-Campano/Estacionamiento#readme"
+}
