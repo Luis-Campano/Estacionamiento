@@ -4,7 +4,9 @@
   "description": "Servicio web para un estacionamiento",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./index.js",
+    "start": "node ./index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,17 @@
   "bugs": {
     "url": "https://github.com/Luis-Campano/Estacionamiento/issues"
   },
-  "homepage": "https://github.com/Luis-Campano/Estacionamiento#readme"
+  "homepage": "https://github.com/Luis-Campano/Estacionamiento#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.20.1",
+    "tedious": "^14.5.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
+  }
 }
