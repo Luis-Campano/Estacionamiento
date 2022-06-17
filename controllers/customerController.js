@@ -1,4 +1,4 @@
-const { Op, ValidationErrorItem } = require("sequelize");
+const { Op } = require("sequelize");
 const res = require('express/lib/response');
 const { Customer } = require('../models');
 
@@ -101,3 +101,38 @@ exports.update = async (req, res, next) => {
 };
 
 //Busqueda de usuarios.
+exports.search =  async (req, res, next) => {
+  try {
+    const customers = await Customer.findAll({
+      where: {
+        [Op.or]: [
+          {
+              name:{
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
+              },
+          },
+          {
+              lastName:{
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
+              },
+          },
+          {
+              email:{
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
+              },
+          },
+          {
+              phone:{
+                [Op.like]: `%${req.query.toLowerCase()}%`
+              },
+          }
+        ]
+      },
+    });
+    res.json({results: customers});
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error al buscas clientes',
+    });
+  }
+};
