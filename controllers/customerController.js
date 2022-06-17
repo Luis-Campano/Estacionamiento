@@ -99,3 +99,5 @@ exports.update = async (req, res, next) => {
     });
   }
 };
+
+//Busqueda de usuarios.
