@@ -1,5 +1,5 @@
-const { Op } = require("sequelize");
 const res = require('express/lib/response');
+const { Op } = require("sequelize");
 const { Customer } = require('../models');
 
 //post 
@@ -11,7 +11,9 @@ exports.add = async (req, res, next) => {
       message: "Cliente registrado",
       customer,
     });
+    console.log(customer);
   } catch (error) {
+    console.log(error);
     let errores = [];
     if (error.errors) {
       errores = error.errors.map((errorItem) => ({
@@ -31,11 +33,13 @@ exports.list = async (req, res, next) => {
   try {
     const customer = await Customer.findAll({});
     res.json(customer);
+    console.log(customer);
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: 'Error al buscar Clientes',
     });
-    console.log(error);
+   
   }
 };
 
@@ -45,9 +49,12 @@ exports.show = async (req, res, next) => {
     const customer = await Customer.findOne({
       where: { id: req.params.id },
     });
-    res.json(customer);
+    if(!customers) {
+      res.status(404).json({message:'No se encontro al cliente'});
+  } else {
+      res.json(customers);
+  }
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       message: 'Error al leer Cliente',
     });
@@ -103,12 +110,13 @@ exports.update = async (req, res, next) => {
 //Busqueda de usuarios.
 exports.search =  async (req, res, next) => {
   try {
+            console.log(req.query);
     const customers = await Customer.findAll({
       where: {
         [Op.or]: [
           {
               name:{
-                [Op.like]: `%${req.query.q.toLowerCase()}%`
+                [Op.like]:  `%${req.query.q.toLowerCase()}%`
               },
           },
           {
@@ -123,14 +131,17 @@ exports.search =  async (req, res, next) => {
           },
           {
               phone:{
-                [Op.like]: `%${req.query.toLowerCase()}%`
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
               },
           }
         ]
       },
     });
-    res.json({results: customers});
+    res.json({resultados: customers});
+    console.log(customers);
+
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: 'Error al buscas clientes',
     });

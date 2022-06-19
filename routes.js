@@ -12,5 +12,7 @@ module.exports = () => {
     router.post('/customer', customerController.add);
     router.put('/customer/update/:id', customerController.update);
     router.delete('/customer/delete/:id', customerController.delete);
-    router.get('/customer/search/:id', customerController.search);
+    router.get('/search', customerController.search);
+
+    return router;
 }
