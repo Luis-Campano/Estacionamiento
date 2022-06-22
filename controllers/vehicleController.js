@@ -30,7 +30,9 @@ exports.add = async (req, res, next) => {
 //READ LITS
 exports.list = async (req, res, next) => {
     try {
-      const vehicle = await Vehicle.findAll({});
+      const vehicle = await Vehicle.findAll({
+        include: ['customer'],
+      });
       res.json(vehicle);
     } catch (error) {
       res.status(500).json({
@@ -44,6 +46,7 @@ exports.show = async (req, res, next) => {
     try {
       const vehicle = await Vehicle.findOne({
         where: { id: req.params.id },
+        include: ['customer'],
       });
       if(!vehicle) {
         res.status(404).json({

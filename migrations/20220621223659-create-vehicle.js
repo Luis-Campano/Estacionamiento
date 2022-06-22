@@ -14,14 +14,15 @@ module.exports = {
       model: {
         type: Sequelize.STRING
       },
-      idCustomer: {
-        type: Sequelize.STRING,
+      customerId: {
+        type: Sequelize.INTEGER,
         references: {
-          model: 'Customer',
-          key:'id'
+          model:'Customers',
+          key:'id',
         },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
+        onUpdate:'CASCADE',
+        onDelete:'CASCADE',
+        defaultValue: null,
       },
       createdAt: {
         allowNull: false,

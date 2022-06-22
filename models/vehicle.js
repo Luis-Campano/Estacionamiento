@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Vehicle.belongsTo(models.Customer, {
-        foreignKey:'id',
-        target_key:'customerId'
-
-      })
+        as: 'customer',
+        foreignKey: 'id',
+        target_key: 'customerId',
+      });
     }
   }
   Vehicle.init({
