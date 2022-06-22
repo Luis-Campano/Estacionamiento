@@ -14,6 +14,15 @@ module.exports = {
       model: {
         type: Sequelize.STRING
       },
+      idCustomer: {
+        type: Sequelize.STRING,
+        references: {
+          model: 'Customer',
+          key:'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

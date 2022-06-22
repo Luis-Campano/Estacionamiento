@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Vehicle.belongsTo(models.Customer, {
+        foreignKey:'id',
+        target_key:'customerId'
+
+      })
     }
   }
   Vehicle.init({
@@ -48,7 +53,8 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'No se aceptan caracteres especiales.'
         },
     }
-  }
+  },
+  customerId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Vehicle',
