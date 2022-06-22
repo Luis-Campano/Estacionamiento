@@ -104,4 +104,33 @@ exports.delete = async (req, res, next) => {
     }
   };
   
-//SEARCH MÁS ADELANTE..
+//Busqueda de usuarios.
+exports.search =  async (req, res, next) => {
+  try {
+            console.log(req.query);
+    const vehicle = await Vehicle.findAll({
+      where: {
+        [Op.or]: [
+          {
+              plateNumber:{
+                [Op.like]:  `%${req.query.q.toLowerCase()}%`
+              },
+          },
+          {
+              model:{
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
+              },
+          }
+        ]
+      },
+    });
+    res.json({resultados: vehicle});
+    console.log(vehicle);
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Error al buscar vehículo',
+    });
+  }
+};
