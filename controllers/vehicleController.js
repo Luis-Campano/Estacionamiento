@@ -110,7 +110,7 @@ exports.delete = async (req, res, next) => {
 //Busqueda de usuarios.
 exports.search =  async (req, res, next) => {
   try {
-            console.log(req.query);
+    console.log(req.query);
     const vehicle = await Vehicle.findAll({
       where: {
         [Op.or]: [
