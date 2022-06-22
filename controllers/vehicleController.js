@@ -38,7 +38,6 @@ exports.list = async (req, res, next) => {
       res.status(500).json({
         message: 'Error al mostrar los Vehiculos.',
       });
-     
     }
   };
 //READ ID
@@ -111,24 +110,24 @@ exports.delete = async (req, res, next) => {
 exports.search =  async (req, res, next) => {
   try {
     console.log(req.query);
-    const vehicle = await Vehicle.findAll({
+    const vehicles = await Vehicle.findAll({
       where: {
         [Op.or]: [
           {
-              plateNumber:{
-                [Op.like]:  `%${req.query.q.toLowerCase()}%`
-              },
+            plateNumber:{
+              [Op.like]:  `%${req.query.q.toLowerCase()}%`
+            },
           },
           {
-              model:{
-                [Op.like]: `%${req.query.q.toLowerCase()}%`
-              },
+            model:{
+              [Op.like]:  `%${req.query.q.toLowerCase()}%`
+            },
           }
         ]
       },
     });
-    res.json({resultados: vehicle});
-    console.log(vehicle);
+    res.json({resultados: vehicles});
+    console.log(vehicles);
 
   } catch (error) {
     console.log(error);

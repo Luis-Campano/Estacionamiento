@@ -31,10 +31,9 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'El campo admite de 8 a 12 caracteres.'
         },
         is: {
-          isAlphanumeric: true, 
+          args: /^[0-9a-zA-Z]+$/,
           msg: 'No se aceptan caracteres especiales.'
-        },
-        unique: true,
+        }
       }
     },
     model: {
