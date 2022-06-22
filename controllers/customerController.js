@@ -31,7 +31,9 @@ exports.add = async (req, res, next) => {
 //get
 exports.list = async (req, res, next) => {
   try {
-    const customer = await Customer.findAll({});
+    const customer = await Customer.findAll({
+      include: ['vehicles'],
+    });
     res.json(customer);
     console.log(customer);
   } catch (error) {
@@ -46,8 +48,9 @@ exports.list = async (req, res, next) => {
 //get
 exports.show = async (req, res, next) => {
   try {
-    const customer = await Customer.findOne({
+    const customers = await Customer.findOne({
       where: { id: req.params.id },
+      include: ['vehicles'],
     });
     if(!customers) {
       res.status(404).json({message:'No se encontro al cliente'});
