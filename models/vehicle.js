@@ -14,8 +14,41 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Vehicle.init({
-    plateNumber: DataTypes.STRING,
-    model: DataTypes.STRING
+    plateNumber: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg:'El número de placas, no puede quedar vacío.',
+        },
+        len: {
+          args: [8,12],
+          msg: 'El campo admite de 8 a 12 caracteres.'
+        },
+        is: {
+          isAlphanumeric: true, 
+          msg: 'No se aceptan caracteres especiales.'
+        },
+        unique: true,
+      }
+    },
+    model: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg:'El nombre del modelo, no puede quedar vacío.',
+        },
+        len: {
+          args: [0,30],
+          msg: 'El campo solo admite 30 caracteres'
+        },
+        is: {
+          isAlphanumeric: true, 
+          msg: 'No se aceptan caracteres especiales.'
+        },
+    }
+  }
   }, {
     sequelize,
     modelName: 'Vehicle',
