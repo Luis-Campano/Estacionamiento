@@ -8,11 +8,24 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      plateNumber: {
-        type: Sequelize.STRING
+      lincesPlate: {
+        type: Sequelize.STRING(7),
+        allowNull: false,
+      },
+      brand: {
+        type: Sequelize.STRING(12),
+        allowNull: false,
       },
       model: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30),
+        allowNull: false,
+      },
+      color: {
+        type: Sequelize.STRING(30),
+        allowNull: false,
+      },
+      lastRegistration: {
+        type: Sequelize.DATE
       },
       customerId: {
         type: Sequelize.INTEGER,

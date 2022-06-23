@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Customer.hasMany(models.Vehicle, {
+      models.Customer.hasMany(models.Vehicle, {
         as:'vehicles',
         foreignKey: 'customerId'
       });
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
           msg:'El nombre del usuario, no puede quedar vacío.',
         },
         len: {
-          args: [0,40],
+          args: [0,60],
           msg: 'El campo nombre solo accepta 40 caracteres.'
         },
         is: {
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
           msg:'El/Los apellido del usuario, no puede quedar vacío.',
         },
         len: {
-          args: [0,40],
+          args: [0,60],
           msg: 'El campo apellido solo accepta 40 caracteres.'
         },
         is: {
@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Se deve proporcionar un email valido',
         },
         len: {
-          args: [0,35],
+          args: [0,50],
           msg: 'Email solo acepta 35, caracteres'
         }
       }
@@ -92,6 +92,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    status: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Customer',

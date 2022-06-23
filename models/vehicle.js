@@ -11,15 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Vehicle.belongsTo(models.Customer, {
+      models.Vehicle.belongsTo(models.Customer, {
         as: 'customer',
-        foreignKey: 'id',
-        target_key: 'customerId',
+        foreignKey: 'customerId',
       });
     }
   }
   Vehicle.init({
-    plateNumber: {
+    lincesPlate: {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
@@ -27,8 +26,25 @@ module.exports = (sequelize, DataTypes) => {
           msg:'El número de placas, no puede quedar vacío.',
         },
         len: {
-          args: [8,12],
-          msg: 'El campo admite de 8 a 12 caracteres.'
+          args: [1,8],
+          msg: 'El campo admite de 1 a 8 caracteres.'
+        },
+        is: {
+          args: /^[0-9a-zA-Z]+$/,
+          msg: 'No se aceptan caracteres especiales.'
+        }
+      }
+    },
+    brand: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg:'La marca del vehículo, no puede quedar vacío.',
+        },
+        len: {
+          args: [1,13],
+          msg: 'El campo admite de 1 a 12 caracteres.'
         },
         is: {
           args: /^[0-9a-zA-Z]+$/,
@@ -53,6 +69,25 @@ module.exports = (sequelize, DataTypes) => {
         },
     }
   },
+
+  color: {
+    type: DataTypes.STRING,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg:'El color del vehículo, no puede quedar vacío.',
+      },
+      len: {
+        args: [0,30],
+        msg: 'El campo solo admite 30 caracteres'
+      },
+      is: {
+        isAlphanumeric: true, 
+        msg: 'No se aceptan caracteres especiales.'
+      },
+    }
+  },
+  lastRegistration: DataTypes.DATE,
   customerId: DataTypes.INTEGER,
   }, {
     sequelize,
