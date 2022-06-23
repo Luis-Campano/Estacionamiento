@@ -1,3 +1,4 @@
+const e = require('cors');
 const res = require('express/lib/response');
 const { Op } = require("sequelize");
 const { Customer } = require('../models');
@@ -139,14 +140,22 @@ exports.search =  async (req, res, next) => {
           }
         ]
       },
-    });
-    res.json({resultados: customers});
+    }); 
+    const busqueda = customers;
+    if(!busqueda) {
+      res.status(404).json({
+        message:'Sin resultados.'
+      });
+    } else {
+      res.json({busqueda});
+    }
     console.log(customers);
+
 
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: 'Error al buscas clientes',
+      message: 'Error al buscar clientes',
     });
   }
 };

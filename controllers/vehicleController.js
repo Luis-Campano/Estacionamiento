@@ -33,8 +33,10 @@ exports.list = async (req, res, next) => {
       const vehicle = await Vehicle.findAll({
         include: ['customer'],
       });
+      console.log(vehicle);
       res.json(vehicle);
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         message: 'Error al mostrar los Vehiculos.',
       });

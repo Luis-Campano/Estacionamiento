@@ -9,16 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(60),
+        allowNull: false,
       },
       lastName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(60),
+        allowNull: false,
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50),
       },
       phone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(10),
+      },
+      status: {
+        type: Sequelize.STRING(20),
+        defaultValue: 'Activo', //Habra: Activo/Inactivo/Suspendido/Cancelacion
       },
       createdAt: {
         allowNull: false,
