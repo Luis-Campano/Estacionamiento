@@ -11,17 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Type.belongsTo(models.Vehicle, {
+        as: 'vehicles',
+        foreignKey: 'vehicleId',
+      })
     }
   }
   Type.init({
-    typeVehicle: DataTypes.STRING,
-    validate: {
-      notEmpty: {
-        args: true,
-        msg:'El tipo de vehículo, no puede quedar vacío.',
+    typeVehicle:{
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg:'El tipo de vehículo, no puede quedar vacío.',
+        }
       }
-    }
-  }, {
+    },
+    vehicleId: DataTypes.INTEGER,
+  },{
     sequelize,
     modelName: 'Type',
   });

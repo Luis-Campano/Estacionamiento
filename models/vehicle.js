@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'customer',
         foreignKey: 'customerId',
       });
+
+     /* models.Vehicle.hasOne(models.Type, {
+        as: 'type',*
+      });*/
     }
   }
   Vehicle.init({
@@ -26,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
           msg:'El número de placas, no puede quedar vacío.',
         },
         len: {
-          args: [1,8],
-          msg: 'El campo admite de 1 a 8 caracteres.'
+          args: [1,7],
+          msg: 'El campo admite de 1 a 7 caracteres.'
         },
         is: {
           args: /^[0-9a-zA-Z]+$/,
