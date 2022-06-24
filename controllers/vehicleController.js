@@ -22,9 +22,9 @@ exports.add = async (req, res, next) => {
         }));
       }
       res.status(500).json({
-        message: 'Error al leer los vehículos.',
+        message: 'Error al registrar los vehículos.',
         errors: errores,
-      });
+      });console.log(error);
     }
   };
 //READ LITS
