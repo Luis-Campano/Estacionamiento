@@ -25,12 +25,12 @@ module.exports = () => {
     router.get('/vehiculo/search', vehicleController.search);
 
     //Tipo Vehiculo
-    router.get('/tipos_vehiculos', vehicleController.list);
-    router.get('/tipo_vehiculo/show/:id', vehicleController.show);
-    router.post('/tipo_vehiculo', vehicleController.add);
-    router.put('/tipo_vehiculo/update/:id', vehicleController.update);
-    router.delete('/tipo_vehiculo/delete/:id', vehicleController.delete);
-    router.get('/tipos_vehiculos/search', vehicleController.search);
+    router.get('/tipos_vehiculos', typeVehicleController.list);
+    router.get('/tipo_vehiculo/show/:id', typeVehicleController.show);
+    router.post('/tipo_vehiculo', typeVehicleController.add);
+    router.put('/tipo_vehiculo/update/:id', typeVehicleController.update);
+    router.delete('/tipo_vehiculo/delete/:id', typeVehicleController.delete);
+    router.get('/tipos_vehiculos/search', typeVehicleController.search);
 
     return router;
 }
