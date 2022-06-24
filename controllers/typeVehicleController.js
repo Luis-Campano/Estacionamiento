@@ -128,3 +128,37 @@ exports.update = async (req, res, next) => {
         });
         }
     };
+
+//Busqueda de tipo de vehículo.
+exports.search =  async (req, res, next) => {
+    try {
+        console.log(req.query);
+      const type = await Type.findAll({
+        where: {
+          [Op.or]: [
+            {
+                typeVehicle:{
+                  [Op.like]:  `%${req.query.q.toLowerCase()}%`
+                },
+            }
+          ]
+        },
+      }); 
+      const busqueda = type;
+      if(!busqueda) {
+        res.status(404).json({
+          message:'Sin resultados.'
+        });
+      } else {
+        res.json({busqueda});
+      }
+      console.log(type);
+  
+  
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: 'Error al buscar tipo de vehículo',
+      });
+    }
+  };

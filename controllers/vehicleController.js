@@ -108,15 +108,20 @@ exports.delete = async (req, res, next) => {
     }
   };
   
-//Busqueda de usuarios.
+//Busqueda de vehículo.
 exports.search =  async (req, res, next) => {
   try {
-    console.log(req.query);
-    const vehicles = await Vehicle.findAll({
+      console.log(req.query);
+    const vehicle = await Vehicle.findAll({
       where: {
         [Op.or]: [
           {
-            plateNumber:{
+            lincesPlate:{
+                [Op.like]:  `%${req.query.q.toLowerCase()}%`
+            },
+          },
+          {
+            brand:{
               [Op.like]:  `%${req.query.q.toLowerCase()}%`
             },
           },
@@ -124,17 +129,35 @@ exports.search =  async (req, res, next) => {
             model:{
               [Op.like]:  `%${req.query.q.toLowerCase()}%`
             },
+          },
+          {
+            color:{
+              [Op.like]:  `%${req.query.q.toLowerCase()}%`
+            },
+          },
+          {
+            lastRegistration:{
+              [Op.like]:  `%${req.query.q.toLowerCase()}%`
+            },
           }
         ]
       },
-    });
-    res.json({resultados: vehicles});
-    console.log(vehicles);
+    }); 
+    const busqueda = vehicle;
+    if(!busqueda) {
+      res.status(404).json({
+        message:'Sin resultados.'
+      });
+    } else {
+      res.json({busqueda});
+    }
+    console.log(vehicle);
+
 
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: 'Error al buscar vehículo',
+      message: 'Error al buscar clientes',
     });
   }
 };
