@@ -14,7 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Type.init({
-    typeVehicle: DataTypes.STRING
+    typeVehicle: DataTypes.STRING,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg:'El tipo de vehículo, no puede quedar vacío.',
+      }
+    }
   }, {
     sequelize,
     modelName: 'Type',
