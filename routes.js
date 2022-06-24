@@ -4,6 +4,7 @@ const router = express.Router();
 //importación de controlladores
 const customerController = require('./controllers/customerController');
 const vehicleController = require('./controllers/vehicleController');
+const typeVehicleController = require('./controllers/typeVehicleController');
 
 module.exports = () => {
 
@@ -22,6 +23,14 @@ module.exports = () => {
     router.put('/vehiculo/update/:id', vehicleController.update);
     router.delete('/vehiculo/delete/:id', vehicleController.delete);
     router.get('/vehiculo/search', vehicleController.search);
+
+    //Tipo Vehiculo
+    router.get('/tipos_vehiculos', vehicleController.list);
+    router.get('/tipo_vehiculo/show/:id', vehicleController.show);
+    router.post('/tipo_vehiculo', vehicleController.add);
+    router.put('/tipo_vehiculo/update/:id', vehicleController.update);
+    router.delete('/tipo_vehiculo/delete/:id', vehicleController.delete);
+    router.get('/tipos_vehiculos/search', vehicleController.search);
 
     return router;
 }
