@@ -1,5 +1,5 @@
 const res = require('express/lib/response');
-const { Op } = require('express/lib/response');
+const { Op } = require("sequelize");
 const { Vehicle } = require('../models');
 
 //Funciones CRUD.
@@ -112,38 +112,33 @@ exports.delete = async (req, res, next) => {
 exports.search =  async (req, res, next) => {
   try {
       console.log(req.query);
-    const vehicle = await Vehicle.findAll({
+    const vehicles = await Vehicle.findAll({
       where: {
         [Op.or]: [
           {
-            lincesPlate:{
-                [Op.like]:  `%${req.query.q.toLowerCase()}%`
-            },
+            lincesPlate: {
+              [Op.like]: `%${req.query.q.toLowerCase()}%`
+            }
           },
           {
             brand:{
-              [Op.like]:  `%${req.query.q.toLowerCase()}%`
-            },
+              [Op.like]: `%${req.query.q.toLowerCase()}%`
+            }
           },
           {
             model:{
-              [Op.like]:  `%${req.query.q.toLowerCase()}%`
-            },
+              [Op.like]: `%${req.query.q.toLowerCase()}%`
+            }
           },
           {
             color:{
-              [Op.like]:  `%${req.query.q.toLowerCase()}%`
-            },
-          },
-          {
-            lastRegistration:{
-              [Op.like]:  `%${req.query.q.toLowerCase()}%`
-            },
+              [Op.like]: `%${req.query.q.toLowerCase()}%`
+            }
           }
         ]
       },
-    }); 
-    const busqueda = vehicle;
+    });
+    const busqueda = vehicles;
     if(!busqueda) {
       res.status(404).json({
         message:'Sin resultados.'
@@ -151,13 +146,12 @@ exports.search =  async (req, res, next) => {
     } else {
       res.json({busqueda});
     }
-    console.log(vehicle);
 
 
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: 'Error al buscar clientes',
+      message: 'Error al buscar información.',
     });
   }
 };

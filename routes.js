@@ -22,7 +22,7 @@ module.exports = () => {
     router.post('/vehiculo', vehicleController.add);
     router.put('/vehiculo/update/:id', vehicleController.update);
     router.delete('/vehiculo/delete/:id', vehicleController.delete);
-    router.get('/vehiculo/search', vehicleController.search);
+    router.get('/vehiculos/search', vehicleController.search);
 
     //Tipo Vehiculo
     router.get('/tipos_vehiculos', typeVehicleController.list);

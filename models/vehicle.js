@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'customerId',
       });
 
-     models.Vehicle.belongsTo(models.Type, {
+      models.Vehicle.belongsTo(models.Type, {
         as: 'type',
         foreignKey: 'typeVehicleId',
       });
@@ -67,10 +67,6 @@ module.exports = (sequelize, DataTypes) => {
         len: {
           args: [0,30],
           msg: 'El campo solo admite 30 caracteres'
-        },
-        is: {
-          isAlphanumeric: true, 
-          msg: 'No se aceptan caracteres especiales.'
         },
     }
   },

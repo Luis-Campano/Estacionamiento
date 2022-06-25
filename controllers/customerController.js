@@ -1,7 +1,9 @@
-const e = require('cors');
+
 const res = require('express/lib/response');
 const { Op } = require("sequelize");
 const { Customer } = require('../models');
+const { Vehicle } = require('../models');
+const { Type } = require('../models');
 
 //post 
 exports.add = async (req, res, next) => {
@@ -51,7 +53,15 @@ exports.show = async (req, res, next) => {
   try {
     const customers = await Customer.findOne({
       where: { id: req.params.id },
-      include: ['vehicles'],
+          include: [{
+            model: Vehicle,
+            as:'vehicles', 
+            include: [{
+                model: Type,
+                as:'type',
+            }]
+        }]
+      //include: ['vehicles'],
     });
     if(!customers) {
       res.status(404).json({message:'No se encontro al cliente'});
