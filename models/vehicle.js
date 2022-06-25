@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'customerId',
       });
 
-     /* models.Vehicle.hasOne(models.Type, {
-        as: 'type',*
-      });*/
+     models.Vehicle.belongsTo(models.Type, {
+        as: 'type',
+        foreignKey: 'typeVehicleId',
+      });
     }
   }
   Vehicle.init({
@@ -93,6 +94,7 @@ module.exports = (sequelize, DataTypes) => {
   },
   lastRegistration: DataTypes.DATE,
   customerId: DataTypes.INTEGER,
+  typeVehicleId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Vehicle',
