@@ -5,6 +5,7 @@ const router = express.Router();
 const customerController = require('./controllers/customerController');
 const vehicleController = require('./controllers/vehicleController');
 const typeVehicleController = require('./controllers/typeVehicleController');
+//const rateController = require('./controllers/rateController');
 
 module.exports = () => {
 
@@ -31,6 +32,5 @@ module.exports = () => {
     router.put('/tipo_vehiculo/update/:id', typeVehicleController.update);
     router.delete('/tipo_vehiculo/delete/:id', typeVehicleController.delete);
     router.get('/tipos_vehiculos/search', typeVehicleController.search);
-
     return router;
 }
