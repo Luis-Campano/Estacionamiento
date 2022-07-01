@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
       },
       lastRegistration: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       customerId: {
         type: Sequelize.INTEGER,

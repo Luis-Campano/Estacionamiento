@@ -123,6 +123,7 @@ exports.update = async (req, res, next) => {
   }
 };
 
+
 //Busqueda de usuarios.
 exports.search =  async (req, res, next) => {
   try {
@@ -141,7 +142,7 @@ exports.search =  async (req, res, next) => {
     const busqueda = floor;
     if(!busqueda) {
       res.status(404).json({
-        message:'Sin resultados.'
+        message:'Sin resultados de búsqueda'
       });
     } else {
       res.json({busqueda});

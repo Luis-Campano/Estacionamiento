@@ -144,7 +144,7 @@ exports.search =  async (req, res, next) => {
     const busqueda = rate;
     if(!busqueda) {
       res.status(404).json({
-        message:'Sin resultados.'
+        message:'Sin resultados de búsqueda.'
       });
     } else {
       res.json({busqueda});
@@ -159,6 +159,9 @@ exports.search =  async (req, res, next) => {
     });
   }
 };
+
+
+
 
 
 
