@@ -166,8 +166,9 @@ exports.search =  async (req, res, next) => {
 
 
 //Operación de Horas
+/*
 let hoy = new Date();
 let diferencia = Vehicle.createAt.getTime() - hoy.getTime();
 let horasTranscurridas = diferencia / 1000 / 60 / 60;
 res.json(horasTranscurridas);
-
+*/

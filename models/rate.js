@@ -11,8 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    }
+      models.Rate.belongsTo(models.Floor,{
+        as:'floor',
+        foreignKey:'floorId',
+    })
   }
+ }
   Rate.init({
     quota: DataTypes.FLOAT
   }, {

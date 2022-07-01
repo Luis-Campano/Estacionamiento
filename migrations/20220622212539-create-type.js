@@ -11,6 +11,16 @@ module.exports = {
       typeVehicle: {
         type: Sequelize.STRING
       },
+      floorId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:'Types',
+          key:'id',
+        },
+        onUpdate:'CASCADE',
+        onDelete:'SET NULL',
+        defaultValue: null,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.Type.hasMany(models.Vehicle, {
         as: 'vehicles',
-        foreignKey: 'typeVehicleId',
+        foreignKey: 'vehicleId',
+      });
+      models.Type.belongsTo(models.Floor, {
+        as: 'floor',
+        foreignKey: 'floorId',
       });
     }
   }
@@ -27,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    floorId:DataTypes.INTEGER
   },{
     sequelize,
     modelName: 'Type',
