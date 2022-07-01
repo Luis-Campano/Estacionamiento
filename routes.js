@@ -5,7 +5,8 @@ const router = express.Router();
 const customerController = require('./controllers/customerController');
 const vehicleController = require('./controllers/vehicleController');
 const typeVehicleController = require('./controllers/typeVehicleController');
-//const rateController = require('./controllers/rateController');
+const rateController = require('./controllers/rateController');
+const floorController = require('./controllers/rateController');
 
 module.exports = () => {
 
@@ -32,5 +33,23 @@ module.exports = () => {
     router.put('/tipo_vehiculo/update/:id', typeVehicleController.update);
     router.delete('/tipo_vehiculo/delete/:id', typeVehicleController.delete);
     router.get('/tipos_vehiculos/search', typeVehicleController.search);
+
+    //Planta
+    router.get('/plantas', floorController.list);
+    router.get('/planta/:id', floorController.show);
+    router.post('/planta', floorController.add);
+    router.put('/planta/update/:id', floorController.update);
+    router.delete('/planta/delete/:id', floorController.delete);
+    router.get('/planta/search', floorController.search);
+
+    //tarifa
+    router.get('/tarifas', rateController.list);
+    router.get('/tarifa/:id', rateController.show);
+    //router.post('/planta', typeVehicleController.add);
+    //router.put('/planta/update/:id', typeVehicleController.update);
+    //router.delete('/planta/delete/:id', typeVehicleController.delete);
+    router.get('/tarifa/search', rateController.search);
+
+
     return router;
 }
