@@ -14,7 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Floor.init({
-    name: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg:'El nombre de la planat, no puede quedar vacío.',
+        },
+        len: {
+          args: [0,60],
+          msg: 'El campo nombre solo accepta 60 caracteres.'
+        },
+        is: {
+          args: /^[0-9a-zA-Z]+$/,
+          msg: 'No se aceptan caracteres especiales.'
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'Floor',
