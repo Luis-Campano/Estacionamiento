@@ -41,7 +41,7 @@ exports.list = async (req, res, next) => {
                 as:'vehicles', 
                 include: [{
                     model: Customer,
-                    as:'customer',
+                    as:'customers',
                 }]
             }]
         });

@@ -2,14 +2,14 @@
 const res = require('express/lib/response');
 const { Op } = require("sequelize");
 const { Floor } = require('../models');
-//const { Vehicle } = require('../models');
-//const { Type } = require('../models');
-
+const { Vehicle } = require('../models');
+const { Type } = require('../models');
+const { Customer } = require('../models');
 //post 
 exports.add = async (req, res, next) => {
   try {
     const floorData = { ...req.body };
-    const floor = await Customer.create(floorData);
+    const floor = await Floor.create(floorData);
     res.json({
       message: "Nueva planta registrada",
       floor,
@@ -36,6 +36,18 @@ exports.list = async (req, res, next) => {
   try {
     const floor = await Floor.findAll({
       //include: ['vehicles'],
+      include: [{
+        model: Type,
+        as:'types',
+        include: [{
+          model: Vehicle,
+          as:'vehicles', 
+          include: [{
+            model: Customer,
+            as:'customers',
+          }]
+        }]
+      }]
     });
     res.json(floor);
     console.log(floor);
