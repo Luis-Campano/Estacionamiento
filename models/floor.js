@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      /*
+    
       models.Floor.hasMany(models.Type,{
         as:'types',
-        foreignKey:'typeVehicleId',
+        foreignKey:'floorId',
       });
-      
+      /*
       models.Floor.HasOne(models.Rate, {
         as: 'rate',
         foreignKey:'rateId',
@@ -42,7 +42,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    typeVehicleId:DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Floor',

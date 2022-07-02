@@ -31,7 +31,7 @@ exports.add = async (req, res, next) => {
 exports.list = async (req, res, next) => {
     try {
       const vehicle = await Vehicle.findAll({
-        include: ['customer'],
+        include: ['customers'],
       });
       console.log(vehicle);
       res.json(vehicle);
@@ -47,7 +47,7 @@ exports.show = async (req, res, next) => {
     try {
       const vehicle = await Vehicle.findOne({
         where: { id: req.params.id },
-        include: ['customer'],
+        include: ['customers'],
       });
       if(!vehicle) {
         res.status(404).json({
