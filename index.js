@@ -3,7 +3,8 @@ const cors = require ('cors');
 
 const db = require('./models');
 //Importación de rutas.
-const routes = require('./routes');
+const routes = require('./routes/routes');
+//const routesNoProtegidas = require('./routes/routesNoProtegidas');
 
 //Importación de variables de entorno.
 require('dotenv').config();

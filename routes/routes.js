@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 //importación de controlladores
-const customerController = require('./controllers/customerController');
-const vehicleController = require('./controllers/vehicleController');
-const typeVehicleController = require('./controllers/typeVehicleController');
-const rateController = require('./controllers/rateController');
-const floorController = require('./controllers/floorController');
+const customerController = require('../controllers/customerController');
+const vehicleController = require('../controllers/vehicleController');
+const typeVehicleController = require('../controllers/typeVehicleController');
+const rateController = require('../controllers/rateController');
+const floorController = require('../controllers/floorController');
+const userController = require('../controllers/userController');
 
 module.exports = () => {
 
@@ -50,6 +51,9 @@ module.exports = () => {
     //router.delete('/planta/delete/:id', typeVehicleController.delete);
     router.get('/tarifa/search', rateController.search);
 
+    //Usuario
+    router.get('/users', userController.list);
+    router.get('/user/:id', userController.show);
 
     return router;
 }
