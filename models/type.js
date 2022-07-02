@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.Type.hasMany(models.Vehicle, {
         as: 'vehicles',
-        foreignKey: 'vehicleId',
+        foreignKey: 'typeVehicleId',
       });
       models.Type.belongsTo(models.Floor, {
         as: 'floor',
