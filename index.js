@@ -1,13 +1,21 @@
 const express = require('express'); 
 const cors = require ('cors');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
-const db = require('./models');
-//Importación de rutas.
-const routes = require('./routes/routes');
-//const routesNoProtegidas = require('./routes/routesNoProtegidas');
+
 
 //Importación de variables de entorno.
 require('dotenv').config();
+require('./middleware/auth');
+
+const db = require('./models');
+
+//Importación de rutas.
+const routes = require('./routes/routes');
+//Rutas no protegidas
+const routesNoProtegidas = require('./routes/routesNoProtegidas');
+
 
 // conectar la BD
 db.sequelize.authenticate()
@@ -30,7 +38,11 @@ app.use(
         origin: ['http://localhost:5000'],
     })
 );
-app.use('/', routes());
+
+//Rutas de acceso.
+app.use('/', routesNoProtegidas());
+//rutas protegidas
+app.use('/', passport.authenticate('jwt', { session: false }), routes());
 
 
 //Puerto de escuchar.

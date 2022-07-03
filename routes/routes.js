@@ -7,7 +7,7 @@ const vehicleController = require('../controllers/vehicleController');
 const typeVehicleController = require('../controllers/typeVehicleController');
 const rateController = require('../controllers/rateController');
 const floorController = require('../controllers/floorController');
-const userController = require('../controllers/userController');
+const userController = require('../controllers/Users/userController');
 
 module.exports = () => {
 
