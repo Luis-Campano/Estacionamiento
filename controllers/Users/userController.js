@@ -57,9 +57,9 @@ exports.list = async (req, res, next) => {
 exports.show = async(req, res, next) => {
   try {
       const user = await User.findOne({
-         where: {
-             id: req.params.id,
-         },
+          where: {
+              id: req.params.id,
+          },
       });
       user.password = null;
       if (!user) {
@@ -71,6 +71,60 @@ exports.show = async(req, res, next) => {
       res.status(500).json({
           message: "Error al encontrar al usuario.",
       });
+  }
+};
+
+//Busqueda de usuarios.
+exports.search =  async (req, res, next) => {
+  try {
+            console.log(req.query);
+    const users = await User.findAll({
+      where: {
+        [Op.or]: [
+          {
+              name:{
+                [Op.like]:  `%${req.query.q.toLowerCase()}%`
+              },
+          },
+          {
+              email:{
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
+              },
+          },
+          {
+            password:{
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
+              },
+          },
+          {
+            rol:{
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
+              },
+          },
+          {
+            active:{
+                [Op.like]: `%${req.query.q.toLowerCase()}%`
+              },
+          }
+        ]
+      },
+    }); 
+    const busqueda = users;
+    if(!busqueda) {
+      res.status(404).json({
+        message:'Sin resultados.'
+      });
+    } else {
+      res.json({busqueda});
+    }
+    console.log(users);
+
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Error al buscar usuarios',
+    });
   }
 };
 
