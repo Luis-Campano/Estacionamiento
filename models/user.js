@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 'use strict';
 const {
   Model
@@ -17,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    role: DataTypes.STRING,
+    rol: DataTypes.STRING,
     active: DataTypes.BOOLEAN,
     passwordResetToken: DataTypes.STRING,
     passwordResetExpire: DataTypes.DATE
@@ -25,5 +27,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+  
+  User.prototype.isValidPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  }
+  
   return User;
 };

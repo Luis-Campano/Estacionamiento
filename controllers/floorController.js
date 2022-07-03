@@ -65,17 +65,18 @@ exports.show = async (req, res, next) => {
   try {
     const floor = await Floor.findOne({
       where: { id: req.params.id },
-      /*
+      include: [{
+        model: Type,
+        as:'types',
+        include: [{
+          model: Vehicle,
+          as:'vehicles', 
           include: [{
-            model: Vehicle,
-            as:'vehicles', 
-            include: [{
-                model: Type,
-                as:'type',
-            }]
+            model: Customer,
+            as:'customers',
+          }]
         }]
-      //include: ['vehicles'],
-    */
+      }]
     });
     if(!floor) {
       res.status(404).json({message:'No se encontro la planta'});
