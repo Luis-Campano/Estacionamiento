@@ -4,6 +4,8 @@ const { Op } = require("sequelize");
 const { Customer } = require('../models');
 const { Vehicle } = require('../models');
 const { Type } = require('../models');
+const { Floor } = require('../models');
+
 
 //post 
 exports.add = async (req, res, next) => {
@@ -35,7 +37,18 @@ exports.add = async (req, res, next) => {
 exports.list = async (req, res, next) => {
   try {
     const customer = await Customer.findAll({
-      include: ['vehicles'],
+          include: [{
+            model: Vehicle,
+            as:'vehicles', 
+            include: [{
+                model: Type,
+                as:'types',
+                include: [{
+                  model: Floor,
+                  as: 'floor'
+                }]
+            }],
+        }]
     });
     res.json(customer);
     console.log(customer);
@@ -51,6 +64,7 @@ exports.list = async (req, res, next) => {
 //get
 exports.show = async (req, res, next) => {
   try {
+
     const customers = await Customer.findOne({
       where: { id: req.params.id },
           include: [{
@@ -58,17 +72,22 @@ exports.show = async (req, res, next) => {
             as:'vehicles', 
             include: [{
                 model: Type,
-                as:'type',
-            }]
+                as:'types',
+                include: [{
+                  model: Floor,
+                  as: 'floor'
+                }]
+            }],
         }]
-      //include: ['vehicles'],
     });
+    console.log(customers);
     if(!customers) {
       res.status(404).json({message:'No se encontro al cliente'});
   } else {
       res.json(customers);
   }
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: 'Error al leer Cliente',
     });

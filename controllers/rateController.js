@@ -35,7 +35,7 @@ exports.add = async (req, res, next) => {
 //get
 exports.list = async (req, res, next) => {
   try {
-    console.log(Vehicle.createAt);
+    //console.log(Vehicle.createAt);
 
     const rate = await Rate.findAll({
       //include: ['vehicles'],

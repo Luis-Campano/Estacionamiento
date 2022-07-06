@@ -1,6 +1,8 @@
 const res = require('express/lib/response');
 const { Op } = require("sequelize");
 const { Vehicle } = require('../models');
+const { Type } = require('../models');
+const { Floor } = require('../models');
 
 //Funciones CRUD.
 
@@ -30,8 +32,15 @@ exports.add = async (req, res, next) => {
 //READ LITS
 exports.list = async (req, res, next) => {
     try {
-      const vehicle = await Vehicle.findAll({
-        include: ['customers'],
+      const vehicle = await Vehicle.findAll({ 
+        include: ['customers',{
+          model: Type,
+          as:'types', 
+          include: [{
+            model: Floor,
+            as:'floor',
+          }],   
+      }]
       });
       console.log(vehicle);
       res.json(vehicle);
@@ -47,7 +56,14 @@ exports.show = async (req, res, next) => {
     try {
       const vehicle = await Vehicle.findOne({
         where: { id: req.params.id },
-        include: ['customers'],
+        include: ['customers',{
+          model: Type,
+          as:'types', 
+          include: [{
+            model: Floor,
+            as:'floor',
+          }],   
+      }]
       });
       if(!vehicle) {
         res.status(404).json({
