@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     floorId:DataTypes.INTEGER
-  },{
+  }, {
     sequelize,
     modelName: 'Type',
   });

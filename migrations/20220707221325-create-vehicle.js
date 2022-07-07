@@ -24,9 +24,6 @@ module.exports = {
         type: Sequelize.STRING(30),
         allowNull: false,
       },
-      lastRegistration: {
-        type: Sequelize.DATE,
-      },
       customerId: {
         type: Sequelize.INTEGER,
         references: {
@@ -40,7 +37,7 @@ module.exports = {
       typeVehicleId: {
         type: Sequelize.INTEGER,
         references: {
-          model:'Vehicles',
+          model:'Types',
           key:'id',
         },
         onUpdate:'CASCADE',

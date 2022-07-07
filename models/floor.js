@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    
       models.Floor.hasMany(models.Type,{
         as:'types',
         foreignKey:'floorId',
@@ -36,11 +35,7 @@ module.exports = (sequelize, DataTypes) => {
           args: [0,60],
           msg: 'El campo nombre solo accepta 60 caracteres.'
         },
-        is: {
-          args: /^[0-9a-zA-Z]+$/,
-          msg: 'No se aceptan caracteres especiales.'
-        }
-      }
+      },
     },
   }, {
     sequelize,
