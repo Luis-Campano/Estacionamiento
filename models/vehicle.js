@@ -87,7 +87,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   },
-  lastRegistration: DataTypes.DATE,
   customerId: DataTypes.INTEGER,
   typeVehicleId: DataTypes.INTEGER,
   }, {

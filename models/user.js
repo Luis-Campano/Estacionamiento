@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-
 'use strict';
 const {
   Model
@@ -55,15 +54,15 @@ module.exports = (sequelize, DataTypes) => {
     validate: {
       notEmpty: {
         args: true,
-        msg: 'La contrasena no puede quedar vacío',
+        msg: 'La contraseña no puede quedar vacío',
       },
       len: {
-        args: [0,8],
-        msg: 'la contrasena debe contener 8 caracteres'
+        args: [8,128],
+        msg: 'la contraseña debe contener 8 caracteres'
       },
       is: {
         args: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-        msg: 'La contrasena debe conter al menos una letra mayuscula, una letra minuscula, numero y un caracter especial'
+        msg: 'La contraseña debe conter al menos una letra mayuscula, una letra minuscula, numero y un caracter especial'
       }
     }
   },
@@ -83,7 +82,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
-  
   User.prototype.isValidPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
   }
