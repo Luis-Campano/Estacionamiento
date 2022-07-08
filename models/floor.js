@@ -11,16 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Floor.hasMany(models.Type,{
+     models.Floor.hasMany(models.Type,{
         as:'types',
-        foreignKey:'floorId',
+        //foreignKey:'floorId',
       });
-      /*
-      models.Floor.HasOne(models.Rate, {
-        as: 'rate',
+      models.Floor.belongsTo(models.Rate, {
+        as: 'rates',
         foreignKey:'rateId',
       });
-      */
     }
   }
   Floor.init({
@@ -29,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg:'El nombre de la planat, no puede quedar vacío.',
+          msg:'El nombre de la planta, no puede quedar vacío.',
         },
         len: {
           args: [0,60],
@@ -37,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
+    rateId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Floor',

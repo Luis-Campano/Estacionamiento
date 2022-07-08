@@ -11,10 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Payment.belongsTo(models.Registration, {
+        as: 'registrations',
+        foreignKey: 'registrationId',
+      });
     }
   }
   Payment.init({
-    payment: DataTypes.FLOAT
+    payment: DataTypes.FLOAT,
+    registrationId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Payment',

@@ -14,6 +14,16 @@ module.exports = {
       exit: {
         type: Sequelize.DATE
       },
+      vehicleId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:'Vehicles',
+          key:'id',
+        },
+        onUpdate:'CASCADE',
+        onDelete:'CASCADE',
+        defaultValue: null,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
