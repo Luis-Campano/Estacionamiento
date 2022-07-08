@@ -3,21 +3,22 @@ const res = require('express/lib/response');
 const { Op } = require("sequelize");
 const { Rate } = require('../models');
 const { Vehicle } = require('../models');
-//const { Type } = require('../models');
+const { Type } = require('../models');
+
+const { Floor } = require('../models');
 
 //post 
-/*
+
 exports.add = async (req, res, next) => {
   try {
     const rateData = { ...req.body };
-    const rate = await Customer.create(rateData);
+    const rate = await Rate.create(rateData);
     res.json({
-      message: "Cliente registrado",
+      message: "Tarifa registrado",
       rate,
     });
     console.log(rate);
   } catch (error) {
-    console.log(error);
     let errores = [];
     if (error.errors) {
       errores = error.errors.map((errorItem) => ({
@@ -26,12 +27,13 @@ exports.add = async (req, res, next) => {
       }));
     }
     res.status(500).json({
-      message: 'Error al leer las Tarifa',
+      message: 'Error al leer las Tarifas',
       errors: errores,
     });
+    console.log(error);
   }
 };
-*/
+
 //get
 exports.list = async (req, res, next) => {
   try {

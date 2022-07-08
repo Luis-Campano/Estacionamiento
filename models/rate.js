@@ -11,6 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+     /*models.Rate.belongsTo(models.Floor,{
+        as:'floor',
+        foreignKey: 'floorId',
+      });*/
+      /*models.Rate.belongsTo(models.Registration,{
+        as:'registrations',
+        foreignKey: 'registrtionId',
+      });*/
     }
   }
   Rate.init({

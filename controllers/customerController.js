@@ -6,6 +6,8 @@ const { Vehicle } = require('../models');
 const { Type } = require('../models');
 const { Floor } = require('../models');
 
+const { Rate } = require('../models');
+const {Registration} = require('../models');
 
 //post 
 exports.add = async (req, res, next) => {
@@ -45,7 +47,15 @@ exports.list = async (req, res, next) => {
                 as:'types',
                 include: [{
                   model: Floor,
-                  as: 'floor'
+                  as: 'floors',
+                  include: [{
+                    model: Rate,
+                    as: 'rates',
+                   /* include: [{
+                      model: Registration,
+                      as: 'registrations'
+                    }]*/
+                  }]
                 }]
             }],
         }]
@@ -75,7 +85,11 @@ exports.show = async (req, res, next) => {
                 as:'types',
                 include: [{
                   model: Floor,
-                  as: 'floor'
+                  as: 'floor',
+                  include: [{
+                    model: Registration,
+                    as: 'registrations'
+                  }]
                 }]
             }],
         }]

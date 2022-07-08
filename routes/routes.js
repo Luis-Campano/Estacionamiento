@@ -5,9 +5,10 @@ const router = express.Router();
 const customerController = require('../controllers/customerController');
 const vehicleController = require('../controllers/vehicleController');
 const typeVehicleController = require('../controllers/typeVehicleController');
-const rateController = require('../controllers/rateController');
 const floorController = require('../controllers/floorController');
 const userController = require('../controllers/Users/userController');
+const rateController = require('../controllers/rateController');
+const registrationController = require('../controllers/registrationController');
 
 module.exports = () => {
 
@@ -46,7 +47,7 @@ module.exports = () => {
     //tarifa
     router.get('/tarifas', rateController.list);
     router.get('/tarifa/:id', rateController.show);
-    //router.post('/planta', typeVehicleController.add);
+    router.post('/tarifa', rateController.add);
     //router.put('/planta/update/:id', typeVehicleController.update);
     //router.delete('/planta/delete/:id', typeVehicleController.delete);
     router.get('/tarifa/search', rateController.search);
@@ -54,6 +55,11 @@ module.exports = () => {
     //Usuario
     router.get('/users', userController.list);
     router.get('/user/:id', userController.show);
+
+    //Registro
+    router.get('/registros', registrationController.list);
+    router.get('/registros/:id', registrationController.show);
+    router.post('/registro', registrationController.add);
 
     return router;
 }

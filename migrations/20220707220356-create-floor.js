@@ -12,6 +12,16 @@ module.exports = {
         type: Sequelize.STRING(40),
         allowNull: false,
       },
+      rateId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:'Rates',
+          key:'id',
+        },
+        onUpdate:'CASCADE',
+        onDelete:'SET NULL',
+        defaultValue: null,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'types',
         foreignKey: 'typeVehicleId',
       });
+      models.Vehicle.hasMany(models.Registration, {
+        as: 'registrations',
+      });
     }
   }
   Vehicle.init({

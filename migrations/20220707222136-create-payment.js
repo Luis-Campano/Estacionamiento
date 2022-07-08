@@ -11,6 +11,16 @@ module.exports = {
       payment: {
         type: Sequelize.FLOAT
       },
+      registrationId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:'Registrations',
+          key:'id',
+        },
+        onUpdate:'CASCADE',
+        onDelete:'CASCADE',
+        defaultValue: null,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

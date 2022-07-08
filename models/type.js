@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         as: 'vehicles',
         foreignKey: 'typeVehicleId',
       });
-      models.Type.belongsTo(models.Floor, {
-        as: 'floor',
+     models.Type.belongsTo(models.Floor, {
+        as: 'floors',
         foreignKey: 'floorId',
       });
     }
