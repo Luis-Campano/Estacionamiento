@@ -23,7 +23,7 @@ module.exports = {
       },
       rol: {
         type: Sequelize.STRING(20),
-        defaultValue: 'user',
+        defaultValue: 'employee', //Roles: employee, Admin and Super
       },
       active: {
         type: Sequelize.BOOLEAN,

@@ -3,6 +3,9 @@ const { Op } = require("sequelize");
 const { Registration } = require('../models');
 const { Vehicle } = require('../models');
 const { Customer } = require('../models');
+const { Type } = require('../models');
+const { Floor } = require('../models');
+const { Rate } = require('../models');
 
 
 //post 
@@ -34,17 +37,27 @@ exports.add = async (req, res, next) => {
     //get
 exports.list = async (req, res, next) => {
     try {
-        //console.log(Vehicle.createAt);
         const registration = await Registration.findAll({
             include: [{
                 model: Vehicle,
-                as:'vehicles', 
+                as: 'vehicles',
                 include: [{
                     model: Customer,
-                    as:'customers'
+                    as: 'customers'
+                }],
+                include: [{
+                    model: Type,
+                    as:'types',
+                    include: [{
+                        model: Floor,
+                        as:'floors',
+                        include: [{
+                            model: Rate,
+                            as:'rates',
+                            }]
+                        }]
                 }]
             }]
-                    
         });
         res.json(registration);
         console.log(registration);
