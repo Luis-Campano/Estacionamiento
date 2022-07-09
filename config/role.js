@@ -19,7 +19,7 @@ exports.roles = () => {
     //crear solo: 'customers', 'rates','floors', 'types','vehicles','registrations', 'payments'
     //Actualizar: 'customers', 'rates', 'floors', 'types','vehicles','registrations', 'payments'
     ac.grant('admin')
-        .extend('user')
+        .extend('employee')
         .readAny(['customers', 'rates','floors', 'types','vehicles','registrations', 'payments'])
         .createAny(['customers', 'rates','floors', 'types','vehicles','registrations', 'payments', 'users'])
         .updateAny(['customers', 'rates','floors', 'types','vehicles','registrations', 'payments', 'users']);
@@ -31,5 +31,6 @@ exports.roles = () => {
     ac.grant('super')
         .extend('admin')
         .deleteAny(['customers', 'rates','floors', 'types','vehicles','registrations', 'payments','users']);
-
+    
+    return ac;
 };
