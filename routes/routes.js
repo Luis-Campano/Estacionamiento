@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+/*Importaci[on] de accessCotrol.js*/
+const { grantAccess } = require('../middleware/accessControl');
+
 //importación de controlladores
 const customerController = require('../controllers/customerController');
 const vehicleController = require('../controllers/vehicleController');
@@ -13,12 +16,12 @@ const registrationController = require('../controllers/registrationController');
 module.exports = () => {
 
     //Customer
-    router.get('/customers', customerController.list);
-    router.get('/customer/show/:id', customerController.show);
-    router.post('/customer', customerController.add);
-    router.put('/customer/update/:id', customerController.update);
-    router.delete('/customer/delete/:id', customerController.delete);
-    router.get('/customer/search', customerController.search);
+    router.get('/customers', grantAccess('readAny', 'customers'),customerController.list);
+    router.get('/customer/show/:id',  grantAccess('readAny', 'customers'), customerController.show);
+    router.post('/customer',  grantAccess('creatAny', 'customers'), customerController.add);
+    router.put('/customer/update/:id', grantAccess('updateAny', 'customers'), customerController.update);
+    router.delete('/customer/delete/:id', grantAccess('deleteAny', 'customers'), customerController.delete);
+    router.get('/customer/search', grantAccess('readAny', 'customers'),customerController.search);
 
     //Vehiculo
     router.get('/vehiculos', vehicleController.list);
@@ -53,6 +56,7 @@ module.exports = () => {
     router.get('/tarifa/search', rateController.search);
 
     //Usuario
+    router.post('/signup', userController.add);
     router.get('/users', userController.list);
     router.get('/user/:id', userController.show);
 

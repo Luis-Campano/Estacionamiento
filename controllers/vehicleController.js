@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const { Vehicle } = require('../models');
 const { Type } = require('../models');
 const { Floor } = require('../models');
+const { Rate } = require('../models');
 
 //Funciones CRUD.
 
@@ -38,7 +39,11 @@ exports.list = async (req, res, next) => {
           as:'types', 
           include: [{
             model: Floor,
-            as:'floor',
+            as:'floors',
+            include : [{
+              model: Rate,
+              as:'rates',
+            }]
           }],   
       }]
       });
