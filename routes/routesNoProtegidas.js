@@ -3,12 +3,10 @@ const express = require('express');
 const router = express.Router();
 
 const sesionController = require('../controllers/Users/sesionController');
-const userController = require('../controllers/Users/userController');
-
 module.exports = function() {
   // rutas que no requieren autenticacion
+  //Solo se contara con la ruta de login.
   router.post('/login', sesionController.login);
-  router.post('/signup', userController.add);
- 
+  //Ruta de recuperación de contraseña.
   return router;
 };

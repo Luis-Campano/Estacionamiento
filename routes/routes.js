@@ -16,54 +16,54 @@ const registrationController = require('../controllers/registrationController');
 module.exports = () => {
 
     //Customer
-    router.get('/customers', grantAccess('readAny', 'customers'),customerController.list);
+    router.get('/customers', grantAccess('readAny', 'customers'), customerController.list);
     router.get('/customer/show/:id',  grantAccess('readAny', 'customers'), customerController.show);
-    router.post('/customer',  grantAccess('creatAny', 'customers'), customerController.add);
+    router.post('/customer',  grantAccess('createAny', 'customers'), customerController.add);
     router.put('/customer/update/:id', grantAccess('updateAny', 'customers'), customerController.update);
     router.delete('/customer/delete/:id', grantAccess('deleteAny', 'customers'), customerController.delete);
     router.get('/customer/search', grantAccess('readAny', 'customers'),customerController.search);
 
     //Vehiculo
-    router.get('/vehiculos', vehicleController.list);
-    router.get('/vehiculo/show/:id', vehicleController.show);
-    router.post('/vehiculo', vehicleController.add);
-    router.put('/vehiculo/update/:id', vehicleController.update);
-    router.delete('/vehiculo/delete/:id', vehicleController.delete);
-    router.get('/vehiculos/search', vehicleController.search);
+    router.get('/vehiculos', grantAccess('readAny', 'vehicles'), vehicleController.list);
+    router.get('/vehiculo/show/:id', grantAccess('readAny', 'vehicles'), vehicleController.show);
+    router.post('/vehiculo', grantAccess('createAny', 'vehicles'), vehicleController.add);
+    router.put('/vehiculo/update/:id', grantAccess('updateAny', 'vehicles'), vehicleController.update);
+    router.delete('/vehiculo/delete/:id', grantAccess('deleteAny', 'vehicles'), vehicleController.delete);
+    router.get('/vehiculos/search', grantAccess('readAny', 'vehicles'), vehicleController.search);
 
     //Tipo Vehiculo
-    router.get('/tipos_vehiculos', typeVehicleController.list);
-    router.get('/tipo_vehiculo/show/:id', typeVehicleController.show);
-    router.post('/tipo_vehiculo', typeVehicleController.add);
-    router.put('/tipo_vehiculo/update/:id', typeVehicleController.update);
-    router.delete('/tipo_vehiculo/delete/:id', typeVehicleController.delete);
-    router.get('/tipos_vehiculos/search', typeVehicleController.search);
+    router.get('/tipos_vehiculos', grantAccess('readAny', 'types'), typeVehicleController.list);
+    router.get('/tipo_vehiculo/show/:id', grantAccess('readAny', 'types'), typeVehicleController.show);
+    router.post('/tipo_vehiculo', grantAccess('createAny', 'types'), typeVehicleController.add);
+    router.put('/tipo_vehiculo/update/:id', grantAccess('updateAny', 'types'), typeVehicleController.update);
+    router.delete('/tipo_vehiculo/delete/:id', grantAccess('readAny', 'types'), typeVehicleController.delete);
+    router.get('/tipos_vehiculos/search', grantAccess('readAny', 'types'), typeVehicleController.search);
 
     //Planta
-    router.get('/plantas', floorController.list);
-    router.get('/planta/:id', floorController.show);
-    router.post('/planta', floorController.add);
-    router.put('/planta/update/:id', floorController.update);
-    router.delete('/planta/delete/:id', floorController.delete);
-    router.get('/planta/search', floorController.search);
+    router.get('/plantas', grantAccess('readAny', 'floors'), floorController.list);
+    router.get('/planta/:id', grantAccess('readAny', 'floors'), floorController.show);
+    router.post('/planta', grantAccess('createAny', 'floors'), floorController.add);
+    router.put('/planta/update/:id' , grantAccess('updateAny', 'floors'), floorController.update);
+    router.delete('/planta/delete/:id', grantAccess('deleteAny', 'floors'), floorController.delete);
+    router.get('/planta/search', grantAccess('readAny', 'floors'), floorController.search);
 
     //tarifa
-    router.get('/tarifas', rateController.list);
-    router.get('/tarifa/:id', rateController.show);
-    router.post('/tarifa', rateController.add);
-    //router.put('/planta/update/:id', typeVehicleController.update);
-    //router.delete('/planta/delete/:id', typeVehicleController.delete);
-    router.get('/tarifa/search', rateController.search);
+    router.get('/tarifas', grantAccess('readAny', 'rates'), rateController.list);
+    router.get('/tarifa/:id', grantAccess('readAny', 'rates'), rateController.show);
+    router.post('/tarifa', grantAccess('createAny', 'rates'), rateController.add);
+    //router.put('/tarifa/update/:id', grantAccess('updateAny', 'rates'), rateController.update);
+    //router.delete('/tarifa/delete/:id', grantAccess('deleteAny', 'rates'), rateController.delete);
+    router.get('/tarifa/search', grantAccess('readAny', 'rates'), rateController.search);
 
     //Usuario
-    router.post('/signup', userController.add);
-    router.get('/users', userController.list);
-    router.get('/user/:id', userController.show);
+    router.post('/signup', grantAccess('createAny', 'users'), userController.add);
+    router.get('/users', grantAccess('readAny', 'users'), userController.list);
+    router.get('/user/:id', grantAccess('readAny', 'users'), userController.show);
 
     //Registro
-    router.get('/registros', registrationController.list);
-    router.get('/registros/:id', registrationController.show);
-    router.post('/registro', registrationController.add);
+    router.get('/registros', grantAccess('readAny', 'registrations'), registrationController.list);
+    router.get('/registros/:id', grantAccess('readAny', 'registrations'), registrationController.show);
+    router.post('/registro', grantAccess('createAny', 'registrations'), registrationController.add);
 
     return router;
 }
