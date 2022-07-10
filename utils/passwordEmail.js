@@ -24,7 +24,7 @@ exports.passwordEmail = async (name, email, token) => {
     mensaje += 'El enlace es válido sólo por una hora desde su envío.';
 
     let info = await transporter.sendMail({
-      from: 'Sandra Salas <sandra.salas19@utim.edu.mx>',//`process.env.NAME_SMTP <{process.env.USUARIO_SMTP}>`, // sender address
+      from: 'Luis Campano <luisr.campano19@utim.edu.mx>',//`process.env.NAME_SMTP <{process.env.USUARIO_SMTP}>`, // sender address
       to: `${name}<${email}>`, // list of receivers: Juan Pérez<juan@algo.com>
       subject: "Recuperación de contraseña", // Subject line
       html: mensaje, // html body

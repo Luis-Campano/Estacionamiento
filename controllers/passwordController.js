@@ -27,7 +27,7 @@ exports.resetearPassword = async (request, response, next) => {
 
     // guardar el token
     usuario.passwordResetToken = token;
-    usuario.paswordResetExpire = Date.now() + 3600000; // expira en 1 hora
+    usuario.passwordResetExpire = Date.now() + 3600000; // expira en 1 hora
 
     await usuario.save();
 
@@ -58,30 +58,31 @@ exports.resetearPassword = async (request, response, next) => {
 
 exports.validarToken = async (request, response, next) => {
     try {
-        // buscar el usuario con el token, y vigencia
-        const usuario = await User.findOne({
+      // buscar el usuario con el toke, y vigencia
+      const usuario = await User.findOne({
         where: {
-            passwordResetToken: request.body.token,
-            passwordResetToken: {[Op.gt]: new Date() }, // el token aún le quede vida
+          passwordResetToken: request.body.token,
+          passwordResetExpire: {[Op.gt]: new Date() }, // el token aún le quede vida
         }
-        });
-
-        if (!usuario) {
+      });
+  
+      if (!usuario) {
         return response.status(400).json({
-            message: 'El link de restablecer contraseña es inválido o ha expirado.'
+          message: 'El link de restablecer contraseña es inválido o ha expirado.'
         });
-        }
-
-        // retornar un status que indique que si es válido
-        response.json({
+      }
+  
+      // retornar un status que indique que si es válido
+      response.json({
         isValid: true,
         message: 'Ingrese una nueva contraseña.',
-        });
+      });
     } catch (error) {
-        console.log(error);
-        response.status(503).json({ message: 'Error al validad el token.' });
+      console.log(error);
+      response.status(503).json({ message: 'Error al validad el token.' });
     }
-};
+  };
+  
 
 exports.guardarNuevoPassword = async (request, response, next) => {
     try {
@@ -89,7 +90,7 @@ exports.guardarNuevoPassword = async (request, response, next) => {
         const usuario = await User.findOne({
         where: {
             passwordResetToken: request.body.token,
-            passwordResetToken: {[Op.gt]: new Date() }, // el token aún le quede vida
+            passwordResetExpire: {[Op.gt]: new Date() }, // el token aún le quede vida
         }
     });
 
@@ -112,7 +113,7 @@ exports.guardarNuevoPassword = async (request, response, next) => {
 
     // quitar el token de recuperación
     usuario.passwordResetToken = '';
-    usuario.paswordResetExpire = null;
+    usuario.passwordResetExpire = null;
 
     // guardamos cambios
     await usuario.save();
