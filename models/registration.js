@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       models.Registration.hasOne(models.Payment, {
         as: 'payments',
+        foreignKey: 'registrationId'
       });
     }
   }

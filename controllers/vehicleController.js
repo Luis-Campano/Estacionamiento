@@ -47,7 +47,7 @@ exports.list = async (req, res, next) => {
           }],   
       }]
       });
-      console.log(vehicle);
+      console.log(vehicle.model);
       res.json(vehicle);
     } catch (error) {
       console.log(error);
@@ -66,17 +66,20 @@ exports.show = async (req, res, next) => {
           as:'types', 
           include: [{
             model: Floor,
-            as:'floor',
+            as:'floors',
           }],   
       }]
-      });
+      });      
+      
+      console.log(vehicle);
+      console.log(vehicle.createdAt);                   
       if(!vehicle) {
-        res.status(404).json({
+        return res.status(404).json({
             message:'No se encontro el Vehículo.'
         });
-    } else {
+    } 
         res.json(vehicle);
-    }
+    
     } catch (error) {
       res.status(500).json({
         message: 'Error al leer Vehículo',
