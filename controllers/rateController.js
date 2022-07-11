@@ -56,7 +56,6 @@ exports.list = async (req, res, next) => {
 //get
 exports.show = async (req, res, next) => {
   try {
-    console.log(Vehicle.createdAt);
     const rate = await Rate.findOne({
       where: { id: req.params.id },
       /*
@@ -83,8 +82,6 @@ exports.show = async (req, res, next) => {
   }
 };
 
-//delete
-/*
 exports.delete = async (req, res, next) => {
   try {
     await Rate.destroy({
@@ -129,7 +126,6 @@ exports.update = async (req, res, next) => {
     });
   }
 };
-*/
 
 //Busqueda de usuarios.
 exports.search =  async (req, res, next) => {
@@ -139,24 +135,21 @@ exports.search =  async (req, res, next) => {
       where: {
         [Op.or]: [
           {
-              quota:{
-                [Op.like]:  `%${req.query.q.toLowerCase()}%`
-              },
+            quota:{
+              [Op.like]:  `%${req.query.q.toLowerCase()}%`
+            },
           },
         ]
       },
     }); 
     const busqueda = rate;
     if(!busqueda) {
-      res.status(404).json({
+      return res.status(404).json({
         message:'Sin resultados de búsqueda.'
       });
-    } else {
-      res.json({busqueda});
     }
+      res.json({busqueda});
     console.log(rate);
-
-
   } catch (error) {
     console.log(error);
     res.status(500).json({
