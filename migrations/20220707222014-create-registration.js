@@ -8,12 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      entry: {
-        type: Sequelize.DATE
-      },
-      exit: {
-        type: Sequelize.DATE
-      },
       vehicleId: {
         type: Sequelize.INTEGER,
         references: {
