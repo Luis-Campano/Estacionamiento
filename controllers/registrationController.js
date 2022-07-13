@@ -183,9 +183,7 @@ exports.show = async (req, res, next) => {
       }
   };
 
-//Funcion de busqueda.
-
-  
+//Funcion de busqueda. Para la busqueda de placa del vehiculo
 //Busqueda de registro con placa en espesifico.
 exports.search =  async (req, res, next) => {
   try {
