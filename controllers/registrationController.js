@@ -133,97 +133,97 @@ exports.show = async (req, res, next) => {
                         }]
                 }]
             }]
-           //include: ['payments']
         });
-               //Codigo de practica
+      //Codigo de practica
       // si fuese a calcular la tarifa, hacer las operaciones
       // tomar la fecha y hora de entrada y la feca y hora actual
-      console.log("Hora del registro: "+registration.createdAt)
       const distanceTime = intervalToDuration({
         start: registration.createdAt,
         end: new Date(),
       });
       //distanceTime tiene> years, months, days, hours, minutes 
       // tomar las horas y minutos
-      console.log("TIEMPO:");
-      console.log(distanceTime);
       // ir por los datos de la tarifa por hora
       const rate = db.Rate.findOne({
         where: {
           type: 'hora'
         }
       });
-
       // si no esta la tarifa, tirar error
-
       // la tarifa trae: type, quota
-
       // calcular la tarifa
       let totalTime = distanceTime.hours;
-      console.log("TIEMPO TOTAL")
-      console.log(totalTime);
-      console.log("Cuata: "+registration.vehicles.types.floors.rates.quota);
-      console.log("Tolerancia: "+registration.vehicles.types.floors.rates.tolerance)
-
       let rateAmount = distanceTime.hours * registration.vehicles.types.floors.rates.quota;
       if (distanceTime.minutes >= registration.vehicles.types.floors.rates.tolerance) {
         // aumentas una unidad por tarifa
         rateAmount += registration.vehicles.types.floors.rates.quota;
         totalTime += 1;
       }
-          console.log(rateAmount);
-          try {
-            const pagoData = {rateAmount}
-            const pago = await Payment.create(pagoData);
-            
-            console.log("Pago registrados"+ pago);
-          } catch (error) {
-            console.log(error);
-          }
-      res.json({ registration, totalTime, rateAmount });
+      //Guardar campos en Modelo de payment
+      console.log("ID: " +registration.id );
+      console.log("PAGO: "+ rateAmount);
 
-        console.log(registration);
-        if(!registration) {
-            return res.status(404).json({message:'No se encontro el registro'});
-        } 
-        } catch (error) {
-            console.log(error);
-        res.status(500).json({
-            message: 'Error al leer registros',
-        });
-        }
-    };
+      //Guardar pago
+      let payment = rateAmount;
+      let registrationId= registration.id;
+
+      const pagoData = {payment, registrationId}
+      const pago = await Payment.create(pagoData);
+        
+      //Mostrar resultado
+      res.json({ registration, totalTime, rateAmount, pago });
+      console.log(registration);
+      if(!registration) {
+          return res.status(404).json({message:'No se encontro el registro'});
+      } 
+      } catch (error) {
+      res.status(500).json({
+          message: 'Error al leer registros',
+      });
+      }
+  };
 
 //Funcion de busqueda.
 
-  /*
-//Busqueda de vehículo.
+  
+//Busqueda de registro con placa en espesifico.
 exports.search =  async (req, res, next) => {
-    try {
-        console.log(req.query);
-      const registros = await Vehicle.findAll({
-        include: [{}]
+  try {
+      console.log(req.query);
+    const registration = await Vehicle.findAll({
         where: {
           [Op.or]: [
             {
-              vehicle.lincesPlate: {
+              lincesPlate: {
                 [Op.like]: `%${req.query.q.toLowerCase()}%`
               }
             }
           ]
         },
-      });
-      const busqueda = registros;
-      if(!busqueda) {
-        return res.status(404).json({
-          message:'Sin resultados.'
-        });
-      }
-        res.json({busqueda});
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        message: 'Error al buscar información.',
+        include: ['customers',{
+          model: Type,
+          as:'types', 
+          include: [{
+            model: Floor,
+            as:'floors',
+            include : [{
+              model: Rate,
+              as:'rates',
+            }]
+          }],   
+      }]
+    });
+    const searchRegistration = registration;
+    if(!searchRegistration) {
+      return res.status(404).json({
+        message:'Sin resultados.'
       });
     }
-  };*/
+      res.json({searchRegistration});
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Error al buscar información.',
+    });
+  }
+};
