@@ -26,8 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Registration.init({
-    entry: DataTypes.DATE,
-    exit: DataTypes.DATE,
     vehicleId: DataTypes.INTEGER
   }, {
     sequelize,

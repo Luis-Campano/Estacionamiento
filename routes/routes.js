@@ -12,7 +12,6 @@ const floorController = require('../controllers/floorController');
 const userController = require('../controllers/Users/userController');
 const rateController = require('../controllers/rateController');
 const registrationController = require('../controllers/registrationController');
-const registrationController = require('../controllers/registrationController');
 
 //eliminary configuration
 const pagoController = require('../controllers/paymentController');
@@ -67,10 +66,11 @@ module.exports = () => {
     router.get('/registros', grantAccess('readAny', 'registrations'), registrationController.list);
     router.get('/registro/:id', grantAccess('readAny', 'registrations'), registrationController.show);
     router.post('/registro', grantAccess('createAny', 'registrations'), registrationController.add);
+    router.get('/search-registrations', grantAccess('readAny', 'registrations'), registrationController.search)
 
     //Pagos
     router.get('/pagos', grantAccess('readAny', 'payments'), pagoController.list);
     router.get('/pago/:id', grantAccess('readAny', 'payments'), pagoController.show);
-    router.get('/pago', grantAccess('createAny', 'payments'), pagoController.add);
+
     return router;
 }
