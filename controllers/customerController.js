@@ -1,13 +1,14 @@
-
 const res = require('express/lib/response');
 const { Op } = require("sequelize");
 const { Customer } = require('../models');
 const { Vehicle } = require('../models');
 const { Type } = require('../models');
 const { Floor } = require('../models');
-
 const { Rate } = require('../models');
 const {Registration} = require('../models');
+const  {notificationEmail}  = require('../utils/notificationEmail');
+
+
 
 //post 
 exports.add = async (req, res, next) => {
@@ -18,7 +19,10 @@ exports.add = async (req, res, next) => {
       message: "Cliente registrado",
       customer,
     });
-    console.log(customer);
+    notificationEmail(
+      customer.name,
+      customer.email
+    );
   } catch (error) {
     console.log(error);
     let errores = [];
