@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Customer.hasMany(models.Vehicle, {
-        as:'vehicles',
+        as: 'vehicles',
         foreignKey: 'customerId'
       });
     }
@@ -23,10 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg:'El nombre del usuario, no puede quedar vacío.',
+          msg: 'El nombre del usuario, no puede quedar vacío.',
         },
         len: {
-          args: [0,60],
+          args: [0, 60],
           msg: 'El campo nombre solo accepta 40 caracteres.'
         },
         is: {
@@ -41,10 +41,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg:'El/Los apellido del usuario, no puede quedar vacío.',
+          msg: 'El/Los apellido del usuario, no puede quedar vacío.',
         },
         len: {
-          args: [0,60],
+          args: [0, 60],
           msg: 'El campo apellido solo accepta 40 caracteres.'
         },
         is: {
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    
+
     email: {
       type: DataTypes.STRING,
       validate: {
@@ -61,12 +61,12 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'El email no puede quedar vacío',
         },
-        isEmail:{
+        isEmail: {
           args: true,
           msg: 'Se deve proporcionar un email valido',
         },
         len: {
-          args: [0,50],
+          args: [0, 50],
           msg: 'Email solo acepta 35, caracteres'
         }
       }
@@ -78,15 +78,15 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'El teléfono no puede quedar vacío',
         },
-        isNumeric:{
+        isNumeric: {
           args: true,
           msg: 'El teléfono solo acepta caracteres, numericos',
         },
         len: {
-          args: [1,10],
+          args: [1, 10],
           msg: 'Teléfono solo acepta 10, caracteres'
         },
-        is:{
+        is: {
           args: /^[0-9]{3}[0-9]{7}$/,
           msg: 'No es un número teléfonico, valido',
         }
