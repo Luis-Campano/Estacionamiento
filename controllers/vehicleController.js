@@ -9,133 +9,136 @@ const { Rate } = require('../models');
 
 //CREATE
 exports.add = async (req, res, next) => {
-    try {
-      const vehicleData = { ...req.body };
-      const vehicle = await Vehicle.create(vehicleData);
-      res.json({
-        message: "Vehículo registrado.",
-        vehicle,
-      });
-    } catch (error) {
-      let errores = [];
-      if (error.errors) {
-        errores = error.errors.map((errorItem) => ({
-          error: errorItem.message,
-          field: errorItem.path,
-        }));
-      }
-      res.status(500).json({
-        message: 'Error al registrar los vehículos.',
-        errors: errores,
-      });console.log(error);
+  try {
+    const vehicleData = { ...req.body };
+    const vehicle = await Vehicle.create(vehicleData);
+    res.status(200).json({
+      message: "Vehículo registrado.",
+      vehicle,
+    });
+  } catch (error) {
+    let errores = [];
+    if (error.errors) {
+      errores = error.errors.map((errorItem) => ({
+        error: errorItem.message,
+        field: errorItem.path,
+      }));
     }
-  };
+    res.status(500).json({
+      message: 'Error al registrar los vehículos.',
+      error: errores,
+    }); console.log(error);
+  }
+};
 //READ LITS
 exports.list = async (req, res, next) => {
-    try {
-      const vehicle = await Vehicle.findAll({ 
-        include: ['customers',{
-          model: Type,
-          as:'types', 
+  try {
+    const vehicle = await Vehicle.findAll({
+      include: ['customers', {
+        model: Type,
+        as: 'types',
+        include: [{
+          model: Floor,
+          as: 'floors',
           include: [{
-            model: Floor,
-            as:'floors',
-            include : [{
-              model: Rate,
-              as:'rates',
-            }]
-          }],   
+            model: Rate,
+            as: 'rates',
+          }]
+        }],
       }]
-      });
-      console.log(vehicle.model);
-      res.json(vehicle);
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        message: 'Error al mostrar los Vehiculos.',
-      });
-    }
-  };
+    });
+    console.log(vehicle.model);
+    res.json(vehicle);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Error al mostrar los Vehiculos.',
+    });
+  }
+};
 //READ ID
 exports.show = async (req, res, next) => {
-    try {
-      const vehicle = await Vehicle.findOne({
-        where: { id: req.params.id },
-        include: ['customers',{
-          model: Type,
-          as:'types', 
-          include: [{
-            model: Floor,
-            as:'floors',
-          }],   
+  try {
+    const vehicle = await Vehicle.findOne({
+      where: { id: req.params.id },
+      include: ['customers', {
+        model: Type,
+        as: 'types',
+        include: [{
+          model: Floor,
+          as: 'floors',
+        }],
       }]
-      });      
-      
-      console.log(vehicle);
-      console.log(vehicle.createdAt);                   
-      if(!vehicle) {
-        return res.status(404).json({
-            message:'No se encontro el Vehículo.'
-        });
-    } 
-        res.json(vehicle);
-    
-    } catch (error) {
-      res.status(500).json({
-        message: 'Error al leer Vehículo',
+    });
+    if (!vehicle) {
+      res.status(404).json({
+        message: 'No se encontro el Vehículo.',
       });
-    }
-  };
-  
+    } else {
+      res.status(200).json(
+        vehicle,
+      );
+    };
+  } catch (error) {
+    res.status(404).json({
+      message: 'Error al leer Vehículo',
+    });
+  }
+};
 //UPDATE
 exports.update = async (req, res, next) => {
-    try {
-      const updateVehicle = { ...req.body };
-      await Vehicle.update(updateVehicle, {
-        where: {
-          id: req.params.id,
-        },
-      });
-      res.json({
-        message: "Vehículo actualizado",
-      });
-  
-    } catch (error) {
-      let errores = [];
-      if (error.errors) {
-        errores = error.errors.map((errorItem) => ({
-          error: errorItem.message,
-          field: errorItem.path,
-        }));
-      }
-      res.status(500).json({
-        message: "Error al actualizar Vehículo",
-        errors: errores,
-      });
+  try {
+    const updateVehicle = { ...req.body };
+    await Vehicle.update(updateVehicle, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.status(200).json({
+      message: "Vehículo actualizado",
+    });
+
+  } catch (error) {
+    let errores = [];
+    if (error.errors) {
+      errores = error.errors.map((errorItem) => ({
+        error: errorItem.message,
+        field: errorItem.path,
+      }));
     }
-  };
+    res.status(500).json({
+      message: "Error al actualizar Vehículo",
+      error: errores,
+    });
+  }
+};
 //DELETE
 exports.delete = async (req, res, next) => {
-    try {
-      await Vehicle.destroy({
-        where: {
-          id: req.params.id,
-        }
+  try {
+    const vehicle = await Vehicle.destroy({
+      where: {
+        id: req.params.id,
+      }
+    });
+    if (!vehicle) {
+      res.status(404).json({
+        message: 'Vehículo no encontrado'
       });
-      res.status(500).json({
+    } else {
+      res.status(200).json({
         message: 'Vehículo eliminado.',
       });
-    } catch (error) {
-      res.status(500).json({
-        message: 'Error al eliminar Vehículo.',
-      });
     }
-  };
-  
-//Busqueda de vehículo.
-exports.search =  async (req, res, next) => {
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error al eliminar Vehículo.',
+    });
+  }
+};
+//SEARCH
+exports.search = async (req, res, next) => {
   try {
-      console.log(req.query);
+    console.log(req.query);
     const vehicles = await Vehicle.findAll({
       where: {
         [Op.or]: [
@@ -145,17 +148,17 @@ exports.search =  async (req, res, next) => {
             }
           },
           {
-            brand:{
+            brand: {
               [Op.like]: `%${req.query.q.toLowerCase()}%`
             }
           },
           {
-            model:{
+            model: {
               [Op.like]: `%${req.query.q.toLowerCase()}%`
             }
           },
           {
-            color:{
+            color: {
               [Op.like]: `%${req.query.q.toLowerCase()}%`
             }
           }
@@ -163,15 +166,15 @@ exports.search =  async (req, res, next) => {
       },
     });
     const busqueda = vehicles;
-    if(!busqueda) {
+    if (busqueda == '') {
       res.status(404).json({
-        message:'Sin resultados.'
+        message: 'Sin resultados.'
       });
     } else {
-      res.json({busqueda});
+      res.status(200).json({
+        busqueda
+      });
     }
-
-
   } catch (error) {
     console.log(error);
     res.status(500).json({

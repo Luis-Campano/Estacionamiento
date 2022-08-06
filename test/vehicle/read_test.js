@@ -1,33 +1,34 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
-
 chai.use(chaiHttp);
+
 const url = 'http://localhost:5000';
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJlbWFpbCI6InJvYmVydG8ubHVpcy5jYW1wYW5vQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIn0sImlhdCI6MTY1OTY2NzQxMSwiZXhwIjoxNjU5OTI2NjExfQ.PNmGZZE7qvsuICmro09jQce-Tpkx-nI2pl8rqGd4xNk';
-// Bloque de Leer Cliente
-describe('Customer', () => {
+
+// Bloque de Leer Vehículo
+describe('Vehicle', () => {
     // primer escenario
-    it('Leer un cliente válido', (done) => {
+    it('Leer un vehículo', (done) => {
         chai.request(url)
-            .get('/customer/show/2')
+            .get('/vehiculo/show/7')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
                 expect(response).to.have.status(200);
                 expect(response.body).to.have.property('id');
-                expect(response.body).to.have.property('name');
-                expect(response.body).to.have.property('lastName');
-                expect(response.body).to.have.property('email');
-                expect(response.body).to.have.property('phone');
+                expect(response.body).to.have.property('lincesPlate');
+                expect(response.body).to.have.property('brand');
+                expect(response.body).to.have.property('model');
+                expect(response.body).to.have.property('color');
                 done();
             });
     });
 
     // segundo escenario
-    it('Error al leer un cliente no existente', (done) => {
+    it('Error al leer un vehículo no existente', (done) => {
         chai.request(url)
-            .get('/customer/show/1')
+            .get('/vehiculo/show/1000')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -36,11 +37,11 @@ describe('Customer', () => {
                 done();
             });
     });
-    
+
     // tecer escenario
-    it('Leer todos los clientes', (done) => {
+    it('Leer todos los vehículos', (done) => {
         chai.request(url)
-            .get('/customers')
+            .get('/vehiculos')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -48,5 +49,4 @@ describe('Customer', () => {
                 done();
             });
     });
-
 });
