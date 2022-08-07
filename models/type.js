@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg:'El tipo de vehículo, no puede quedar vacío.',
+        },
+        is: {
+          args: /^[a-zA-Z]+$/,
+          msg: 'El campo solo accepta texto.'
         }
       }
     },
