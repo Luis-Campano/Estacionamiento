@@ -8,7 +8,6 @@ const { Type } = require('../models');
 const { Floor } = require('../models');
 
 //post 
-
 exports.add = async (req, res, next) => {
   try {
     const rateData = { ...req.body };
@@ -28,9 +27,8 @@ exports.add = async (req, res, next) => {
     }
     res.status(500).json({
       message: 'Error al leer las Tarifas',
-      errors: errores,
+      error: errores,
     });
-    console.log(error);
   }
 };
 
@@ -49,7 +47,7 @@ exports.list = async (req, res, next) => {
     res.status(500).json({
       message: 'Error al buscar Tarifa',
     });
-   
+
   }
 };
 
@@ -57,24 +55,17 @@ exports.list = async (req, res, next) => {
 exports.show = async (req, res, next) => {
   try {
     const rate = await Rate.findOne({
-      where: { id: req.params.id },
-      /*
-          include: [{
-            model: Vehicle,
-            as:'vehicles', 
-            include: [{
-                model: Type,
-                as:'type',
-            }]
-        }]
-      //include: ['vehicles'],
-      */
+      where: { id: req.params.id }
     });
-    if(!rate) {
-      res.status(404).json({message:'No se encontro la Tarifa'});
-  } else {
-      res.json(rate);
-  }
+    if (!rate) {
+      res.status(404).json({
+        message: 'No se encontro la Tarifa',
+      });
+    } else {
+      res.status(200).json(
+        rate,
+      );
+    };
   } catch (error) {
     res.status(500).json({
       message: 'Error al leer Tarifa',
@@ -84,14 +75,21 @@ exports.show = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
   try {
-    await Rate.destroy({
+    const rate = await Rate.destroy({
       where: {
         id: req.params.id,
       }
     });
-    res.status(500).json({
-      message: 'Tarifa eliminada',
-    });
+    if (!rate) {
+      res.status(404).json({
+        message: 'Tarifa no encontrada'
+      });
+    } else {
+      res.status(200).json({
+        message: 'Tarifa eliminada',
+        rate,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: 'Error al eliminar Tarifa',
@@ -103,7 +101,7 @@ exports.delete = async (req, res, next) => {
 exports.update = async (req, res, next) => {
   try {
     const actualizarRate = { ...req.body };
-    await Customer.update(actualizarRate, {
+    await Rate.update(actualizarRate, {
       where: {
         id: req.params.id,
       },
@@ -122,51 +120,50 @@ exports.update = async (req, res, next) => {
     }
     res.status(500).json({
       message: "Error al actualizar Tarifa",
-      errors: errores,
+      error: errores,
     });
   }
 };
 
-//Busqueda de usuarios.
-exports.search =  async (req, res, next) => {
+//Busqueda de tarifa.
+exports.search = async (req, res, next) => {
   try {
     console.log(req.query);
-    const rate = await Rate.findAll({
+    const rates = await Rate.findAll({
       where: {
         [Op.or]: [
           {
-            quota:{
-              [Op.like]:  `%${req.query.q.toLowerCase()}%`
-            },
+            type: {
+              [Op.like]: `%${req.query.q.toLowerCase()}%`
+            }
           },
+          {
+            quota: {
+              [Op.like]: `%${req.query.q.toLowerCase()}%`
+            }
+          },
+          {
+            tolerance: {
+              [Op.like]: `%${req.query.q.toLowerCase()}%`
+            }
+          }
         ]
       },
-    }); 
-    const busqueda = rate;
-    if(!busqueda) {
-      return res.status(404).json({
-        message:'Sin resultados de búsqueda.'
+    });
+    const busqueda = rates;
+    if (busqueda == '') {
+      res.status(404).json({
+        message: 'Sin resultados.'
+      });
+    } else {
+      res.status(200).json({
+        busqueda
       });
     }
-      res.json({busqueda});
-    console.log(rate);
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: 'Error al buscar Tarifa',
+      message: 'Error al buscar tarifas',
     });
   }
 };
-
-
-
-
-
-
-//Operación de Horas
-/*
-let hoy = new Date();
-let diferencia = Vehicle.createAt.getTime() - hoy.getTime();
-let horasTranscurridas = diferencia / 1000 / 60 / 60;
-res.json(horasTranscurridas);
-*/
