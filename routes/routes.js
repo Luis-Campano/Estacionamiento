@@ -53,9 +53,9 @@ module.exports = () => {
     router.get('/tarifas', grantAccess('readAny', 'rates'), rateController.list);
     router.get('/tarifa/:id', grantAccess('readAny', 'rates'), rateController.show);
     router.post('/tarifa', grantAccess('createAny', 'rates'), rateController.add);
-    //router.put('/tarifa/update/:id', grantAccess('updateAny', 'rates'), rateController.update);
-    //router.delete('/tarifa/delete/:id', grantAccess('deleteAny', 'rates'), rateController.delete);
-    router.get('/tarifa/search', grantAccess('readAny', 'rates'), rateController.search);
+    router.put('/tarifa/update/:id', grantAccess('updateAny', 'rates'), rateController.update);
+    router.delete('/tarifa/delete/:id', grantAccess('deleteAny', 'rates'), rateController.delete);
+    router.get('/tarifas/search', grantAccess('readAny', 'rates'), rateController.search);
 
     //Usuario
     router.post('/signup', grantAccess('createAny', 'users'), userController.add);
