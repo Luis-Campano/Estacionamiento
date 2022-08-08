@@ -20,8 +20,11 @@ const renderToken = (user) => {
       id, name, email,
     },
     token,
+   
   };
+
 };
+
 
 exports.login = async (req, res, next) => {
   // invocar a la verificación del usuario con passport
@@ -36,11 +39,12 @@ exports.login = async (req, res, next) => {
         });
       }
 
+
       // procesar el login, y retornar error si lo hay, sino, retornar los datos del usuario autenticado junto con el jwt
       // es lo que se obtendrá al hacer login desde el frontend o postman
       req.login(user, { session: false }, async (error) => {
         if (error) return next(error);
-        return res.json(renderToken(user));
+        return res.status(200).json(renderToken(user));
       });
 
     } catch (error) {
