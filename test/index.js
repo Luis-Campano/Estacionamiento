@@ -1,7 +1,7 @@
 // Importar archivos de prueba
-
+/*
 // Módulo de Customer
-/*require('./customer/add_test');
+require('./customer/add_test');
 require('./customer/update_test');
 require('./customer/read_test');
 require('./customer/delete_test');
@@ -40,12 +40,14 @@ require('./registration/add_test');
 require('./registration/read_test');
 require('./registration/delete_test');
 require('./registration/search_test');
+*/
 
 // Módulo de Pago
-
-*/
+require('./payment/read_test');
+/*
 // Módulo de Usuario
 require('./users/read_test');
 require('./users/search_test');
 require('./users/login_test');
 require('./users/signup_test');
+*/

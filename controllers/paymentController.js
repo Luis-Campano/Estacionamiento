@@ -59,7 +59,7 @@ exports.show = async (req, res, next) => {
                 message:'No se encontro el pago'
             });
         }
-        res.json(pago);
+        return res.json(pago);
         } catch (error) {
             console.log(error);
         res.status(500).json({
