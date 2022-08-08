@@ -47,7 +47,7 @@ module.exports = () => {
     router.post('/planta', grantAccess('createAny', 'floors'), floorController.add);
     router.put('/planta/update/:id' , grantAccess('updateAny', 'floors'), floorController.update);
     router.delete('/planta/delete/:id', grantAccess('deleteAny', 'floors'), floorController.delete);
-    router.get('/planta/search', grantAccess('readAny', 'floors'), floorController.search);
+    router.get('/plantas/search', grantAccess('readAny', 'floors'), floorController.search);
 
     //tarifa
     router.get('/tarifas', grantAccess('readAny', 'rates'), rateController.list);
