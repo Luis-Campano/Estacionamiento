@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const { User } = require('../../models');
+const { Op } = require("sequelize");
 
 exports.add = async (request, response, next) => {
     try {
@@ -62,10 +63,14 @@ exports.show = async(req, res, next) => {
           },
       });
       user.password = null;
-      if (!user) {
-        res.status(404).json({ mensaje: 'No se encontró el usuario.' });
+      if (user == '') {
+        res.status(404).json({
+          mensaje: 'No se encontró el usuario.'
+        });
       } else {
-        res.json(user);
+       return res.json(
+          user
+        );
       }
   } catch (error) {
       res.status(500).json({
@@ -110,12 +115,12 @@ exports.search =  async (req, res, next) => {
       },
     }); 
     const busqueda = users;
-    if(!busqueda) {
+    if(busqueda == '') {
       res.status(404).json({
         message:'Sin resultados.'
       });
     } else {
-      res.json({busqueda});
+      res.status(200).json({busqueda});
     }
     console.log(users);
 

@@ -20,7 +20,7 @@ exports.roles = () => {
     //Actualizar: 'customers', 'rates', 'floors', 'types','vehicles','registrations', 'payments'
     ac.grant('admin')
         .extend('employee')
-        .readAny(['customers', 'rates','floors', 'types','vehicles','registrations', 'payments'])
+        .readAny(['customers', 'rates','floors', 'types','vehicles','registrations', 'payments', 'users'])
         .createAny(['customers', 'rates','floors', 'types','vehicles','registrations', 'payments', 'users'])
         .updateAny(['customers', 'rates','floors', 'types','vehicles','registrations', 'payments', 'users']);
 

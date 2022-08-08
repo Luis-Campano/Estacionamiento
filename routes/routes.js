@@ -61,7 +61,9 @@ module.exports = () => {
     router.post('/signup', grantAccess('createAny', 'users'), userController.add);
     router.get('/users', grantAccess('readAny', 'users'), userController.list);
     router.get('/user/:id', grantAccess('readAny', 'users'), userController.show);
+    router.get('/search-user', grantAccess('readAny', 'users'), userController.search)
 
+    //Pagos
     //Registro
     router.get('/registros', grantAccess('readAny', 'registrations'), registrationController.list);
     router.get('/registro/:id', grantAccess('readAny', 'registrations'), registrationController.show);
