@@ -128,8 +128,6 @@ exports.search =  async (req, res, next) => {
   }
 };
 
-
-
 // mostrar mi perfil
 exports.profile = async (req, res, next) => {
   try {

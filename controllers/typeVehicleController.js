@@ -24,9 +24,9 @@ exports.add = async (req, res, next) => {
             field: errorItem.path,
             }));
         }
-        res.status(500).json({
+        res.status(400).json({
             message: 'Error al leer los tipos de vehiculo',
-            errors: errores,
+            error: errores,
         });
         }
     };
@@ -50,7 +50,7 @@ exports.list = async (req, res, next) => {
         } catch (error) {
         console.log(error);
         res.status(500).json({
-            message: 'Error al buscar  tipos de vehiculos',
+            message: 'Error al leer  tipos de vehiculos',
         });
         
         }
@@ -77,7 +77,8 @@ exports.show = async (req, res, next) => {
             res.json(type);
         }
         } catch (error) {
-        res.status(500).json({
+        res.status(400).json({
+            error: error,
             message: 'Error al leer los tipos de vehiculo',
         });
         }
@@ -86,16 +87,22 @@ exports.show = async (req, res, next) => {
 //delete
 exports.delete = async (req, res, next) => {
     try {
-        await Type.destroy({
+        const type = await Type.destroy({
             where: {
             id: req.params.id,
             }
         });
-        res.status(500).json({
+    if (!type) {
+        res.status(404).json({
+            message: 'Tipo de vehiculo no encontrado'
+        });
+    }else {
+        res.status(200).json({
             message: 'Tipo de vehiculo eliminado',
         });
+    }
         } catch (error) {
-        res.status(500).json({
+        res.status(400).json({
             message: 'Error al eliminar el tipo de vehiculo',
         });
         }
@@ -109,11 +116,11 @@ exports.update = async (req, res, next) => {
             where: {
             id: req.params.id,
             },
-        });
-        res.json({
+        }); 
+        res.status(200).json({
             message: "Tipo de vehiculo actualizado",
         });
-    
+        
         } catch (error) {
         let errores = [];
         if (error.errors) {
@@ -122,9 +129,9 @@ exports.update = async (req, res, next) => {
             field: errorItem.path,
             }));
         }
-        res.status(500).json({
+        res.status(400).json({
             message: "Error al actualizar tipo de vehiculo",
-            errors: errores,
+            error: errores,
         });
         }
     };
@@ -133,32 +140,30 @@ exports.update = async (req, res, next) => {
 exports.search =  async (req, res, next) => {
     try {
         console.log(req.query);
-      const type = await Type.findAll({
-        where: {
-          [Op.or]: [
-            {
-                typeVehicle:{
-                  [Op.like]:  `%${req.query.q.toLowerCase()}%`
-                },
-            }
-          ]
-        },
-      }); 
-      const busqueda = type;
-      if(!busqueda) {
-        res.status(404).json({
-          message:'Sin resultados.'
+        const type = await Type.findAll({
+            where: {
+            [Op.or]: [
+                {
+                    typeVehicle:{
+                    [Op.like]:  `%${req.query.q.toLowerCase()}%`
+                    },
+                }
+            ]
+            },
+        }); 
+        const busqueda = type;
+        if(busqueda == '') {
+            res.status(404).json({
+                message: 'Sin resultados.',
+            });
+        } else {
+            res.json({busqueda});
+        }
+        console.log(type);
+        } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            message: 'Error al buscar tipo de vehículo',
         });
-      } else {
-        res.json({busqueda});
-      }
-      console.log(type);
-  
-  
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        message: 'Error al buscar tipo de vehículo',
-      });
     }
-  };
+};
