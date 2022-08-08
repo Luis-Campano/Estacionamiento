@@ -26,7 +26,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Registration.init({
-    vehicleId: DataTypes.INTEGER
+    vehicleId:{
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg:'El ID del vehículo, no puede quedar vacío.',
+        },
+        isNumeric:{
+          args: true,
+          msg: 'El campos ID Vehículo, solo acepta caracteres, numericos.',
+        },
+      }
+    }
   }, {
     sequelize,
     modelName: 'Registration',
