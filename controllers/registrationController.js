@@ -21,7 +21,7 @@ exports.add = async (req, res, next) => {
             message: "Nuevo registro",
             registration,
         });
-        console.log(registration);
+
         } catch (error) {
         let errores = [];
         if (error.errors) {
@@ -31,10 +31,9 @@ exports.add = async (req, res, next) => {
             }));
         }
         res.status(500).json({
-            message: 'Error al leer los registros',
-            errors: errores,
+            message: 'Error al guardar el registros',
+            error: errores,
         });
-        console.log(error);
         }
     };
     //Atualizar el registro, en caso de ser necesario.
@@ -51,7 +50,7 @@ exports.update = async (req, res, next) => {
         res.json({
             message: "Registro actualizado."
         });
-        console.log(registration);
+
         } catch (error) {
         let errores = [];
         if (error.errors) {
@@ -64,7 +63,6 @@ exports.update = async (req, res, next) => {
             message: 'Error al leer los registros',
             errors: errores,
         });
-        console.log(error);
         }
     };
 
@@ -171,13 +169,17 @@ exports.show = async (req, res, next) => {
       const pago = await Payment.create(pagoData);
         
       //Mostrar resultado
-      res.json({ registration, totalTime, rateAmount, pago });
-      console.log(registration);
-      if(!registration) {
-          return res.status(404).json({message:'No se encontro el registro'});
-      } 
+      if (!registration) {
+        res.status(404).json({
+          message: 'No se encontro el registro',
+        });
+      } else {
+        res.status(200).json(
+          registration, totalTime, rateAmount, pago 
+        );
+      }
       } catch (error) {
-      res.status(500).json({
+      res.status(404).json({
           message: 'Error al leer registros',
       });
       }
@@ -212,16 +214,43 @@ exports.search =  async (req, res, next) => {
       }]
     });
     const searchRegistration = registration;
-    if(!searchRegistration) {
+    if( searchRegistration == '') {
       return res.status(404).json({
-        message:'Sin resultados.'
+        message:'Sin resultados. '
       });
     }
-      res.json({searchRegistration});
+     return res.status(200).json({
+      searchRegistration
+    });
+
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       message: 'Error al buscar información.',
+    });
+  }
+};
+
+//Eliminar registro.
+exports.delete = async (req, res, next) => {
+  try {
+    const registration = await Registration.destroy({
+      where: {
+        id: req.params.id,
+      }
+    });
+    if (!registration) {
+      res.status(404).json({
+        message: 'Registro no encontrado.'
+      });
+    } else {
+      res.status(200).json({
+        message: 'Registro eliminado',
+      });
+    }
+    
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error al eliminar Registro',
     });
   }
 };

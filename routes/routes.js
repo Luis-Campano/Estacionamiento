@@ -66,6 +66,7 @@ module.exports = () => {
     router.get('/registros', grantAccess('readAny', 'registrations'), registrationController.list);
     router.get('/registro/:id', grantAccess('readAny', 'registrations'), registrationController.show);
     router.post('/registro', grantAccess('createAny', 'registrations'), registrationController.add);
+    router.delete('/registro/delete/:id', grantAccess('deleteAny', 'registrations'), registrationController.delete);
     router.get('/search-registrations', grantAccess('readAny', 'registrations'), registrationController.search)
 
     //Pagos
