@@ -26,6 +26,11 @@ require('./rate/delete_test');
 require('./rate/search_test');
 
 // Módulo de Registro
+require('./registration/add_test');
+//Test de actualizar, en este caso no se implemento.
+require('./registration/read_test');
+require('./registration/delete_test');
+require('./registration/search_test');
 
 // Módulo de Pago
 
