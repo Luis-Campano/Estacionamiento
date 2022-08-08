@@ -10,7 +10,7 @@ exports.add = async (req, res, next) => {
   try {
     const floorData = { ...req.body };
     const floor = await Floor.create(floorData);
-    res.json({
+    res.status(200).json({
       message: "Nueva planta registrada",
       floor,
     });
@@ -24,9 +24,9 @@ exports.add = async (req, res, next) => {
         field: errorItem.path,
       }));
     }
-    res.status(500).json({
+    res.status(400).json({
       message: 'Error al leer las Cliente',
-      errors: errores,
+      error: errores,
     });
   }
 };
@@ -81,10 +81,10 @@ exports.show = async (req, res, next) => {
     if(!floor) {
       res.status(404).json({message:'No se encontro la planta'});
   } else {
-      res.json(floor);
+      res.status(200).json(floor);
   }
   } catch (error) {
-    res.status(500).json({
+    res.status(400).json({
       message: 'Error al leer planta',
     });
   }
@@ -93,16 +93,22 @@ exports.show = async (req, res, next) => {
 //delete
 exports.delete = async (req, res, next) => {
   try {
-    await Floor.destroy({
+    const floor = await Floor.destroy({
       where: {
         id: req.params.id,
       }
     });
-    res.status(500).json({
-      message: 'planta eliminada',
-    });
+    if(!floor){
+      res.status(404).json({
+        message: 'planta no encontrada',
+      })
+    }else {
+      res.status(200).json({
+        message: 'planta eliminada',
+      });
+    }
   } catch (error) {
-    res.status(500).json({
+    res.status(400).json({
       message: 'Error al eliminar planta',
     });
   }
@@ -117,7 +123,7 @@ exports.update = async (req, res, next) => {
         id: req.params.id,
       },
     });
-    res.json({
+    res.status(200).json({
       message: "Planta actualizada",
     });
 
@@ -129,9 +135,9 @@ exports.update = async (req, res, next) => {
         field: errorItem.path,
       }));
     }
-    res.status(500).json({
+    res.status(400).json({
       message: "Error al actualizar Planta",
-      errors: errores,
+      error: errores,
     });
   }
 };
@@ -153,19 +159,19 @@ exports.search =  async (req, res, next) => {
       },
     }); 
     const busqueda = floor;
-    if(!busqueda) {
+    if(busqueda=='') {
       res.status(404).json({
         message:'Sin resultados de búsqueda'
       });
     } else {
-      res.json({busqueda});
+      res.status(200).json({busqueda});
     }
     console.log(floor);
 
 
   } catch (error) {
     console.log(error);
-    res.status(500).json({
+    res.status(400).json({
       message: 'Error al buscar planta',
     });
   }

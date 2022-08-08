@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
           args: [0,60],
           msg: 'El campo nombre solo accepta 60 caracteres.'
         },
+      is: {
+        args: /^[a-zA-Z]+$/,
+        msg: 'El campo solo accepta texto.'
+      }
       },
     },
     rateId: DataTypes.INTEGER
