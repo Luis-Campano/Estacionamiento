@@ -4,14 +4,14 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjU5Njc0MjgwLCJleHAiOjE2NTk5MzM0ODB9.Euemj2GtwVWG0NInv940g-9pZHhcwRReit6GgRup18k';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI';
 
 // Bloque de Eliminar Cliente
 describe('Customer', () => {
     // primer escenario
     it('Eliminar un cliente válido', (done) => {
         chai.request(url)
-            .delete('/customer/delete/24')
+            .delete('/customer/delete/14')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

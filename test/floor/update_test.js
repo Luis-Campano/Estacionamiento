@@ -5,7 +5,7 @@ const expect = chai.expect;
 chai.use(chaihttp);
 const url = 'http://localhost:5000';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InNhbmRyYTE5MDhoZXJuYW5kZXpAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjU5NjcyNDQ5LCJleHAiOjE2NTk5MzE2NDl9.w-V8tGnPxBqC-c6Pw75NwZUQpR4ZMvIstuPPv8BCtj0'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI'
 
 describe('Actualizacion de planta', () => {
 
@@ -13,7 +13,7 @@ describe('Actualizacion de planta', () => {
         //primer escenario
         it('Debe actualizar una planta valida', (done) => {
             chai.request(url)
-            .put('/planta/update/1003')
+            .put('/planta/update/2')
             .set({'Authorization': `jwt ${token}`})
             .send({
                 name: 'alta'

@@ -4,14 +4,14 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFsZ29AYWxnby5jb20iLCJyb2wiOiJzdXBlciJ9LCJpYXQiOjE2NTk5MjE3MTMsImV4cCI6MTY2MDAwODExM30.TolPpkkiXRTR6Bb5-didgqQLHYKjBIOuaRdCDl4MDvo';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI';
 
-// bloque de Buscar Tarifa
+// bloque de Buscar Registro
 describe('Registro Búscar', () => {
     //primer escenario
     it('Buscar una placa de vehículo existente.', (done) => {
         chai.request(url)
-            .get('/search-registrations?q=SS6S')
+            .get('/search-registrations?q=Ajidb12')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -23,7 +23,7 @@ describe('Registro Búscar', () => {
     //segundo escenario
     it('Mostrar el mensaje "Sin resultados" cuando no se encuentre una una placa.', (done) => {
         chai.request(url)
-            .get('/search-registrations?q=s5s5')
+            .get('/search-registrations?q=1000')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -36,7 +36,7 @@ describe('Registro Búscar', () => {
     //tecer escenario
     it('Mostrar error cuando la ruta de busqueda sea incorrecta', (done) => {
         chai.request(url)
-            .get('/search-registrations?=SS6S')
+            .get('/search-registrations?=10000')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

@@ -4,17 +4,17 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFsZ29AYWxnby5jb20iLCJyb2wiOiJzdXBlciJ9LCJpYXQiOjE2NTk5MTYyNzYsImV4cCI6MTY2MDAwMjY3Nn0.ErIEbA4xTZlNRURsviUiNizm8spbRp-lI26xQs3C1q0';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI';
 
-// bloque de Agregar Cliente
-describe('Registro Crear', () => {
+// bloque de Agregar Registro
+describe('Registro', () => {
     // primer escenario
     it('Agregar un nuevo registro válido', (done) => {
         chai.request(url)
             .post('/registro')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                vehicleId: 4,
+                vehicleId: 8,
             })
             .end((error, response) => {
                 //validar lo que se escribio

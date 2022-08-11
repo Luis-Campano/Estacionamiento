@@ -12,8 +12,8 @@ describe('Autenticar usuario', () => {
         chai.request(url)
             .post('/login')
             .send({
-                 email: 'algo@algo.com',
-                 password: '12345'
+                 email: 'luis.campano.esp@gmail.com',
+                 password: 'luis19'
             })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -23,7 +23,7 @@ describe('Autenticar usuario', () => {
             });
     });
     // segundo escenario
-    it('Debe rechazar autenticar usuario válido', (done) => {
+    it('Debe rechazar autenticar usuario no válido', (done) => {
         chai.request(url)
             .post('/login')
             .send({

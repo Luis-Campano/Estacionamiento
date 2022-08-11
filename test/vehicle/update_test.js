@@ -5,7 +5,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJlbWFpbCI6InJvYmVydG8ubHVpcy5jYW1wYW5vQGdtYWlsLmNvbSIsInJvbCI6ImFkbWluIn0sImlhdCI6MTY1OTY1MTc4MCwiZXhwIjoxNjU5OTEwOTgwfQ.P0MLQUfV3U6w9C86e9CEdKJw9OtSE-2mXgYUGnGzlP4';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI';
 
 // bloque de Actualizar Vehículo
 describe('Vehicle', () => {
@@ -13,7 +13,7 @@ describe('Vehicle', () => {
 
     it('Actualizar un vehículo válido', (done) => {
         chai.request(url)
-            .put('/vehiculo/update/7')
+            .put('/vehiculo/update/8')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
                 lincesPlate: 'Jabsu19',
