@@ -5,14 +5,14 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFsZ29AYWxnby5jb20iLCJyb2wiOiJzdXBlciJ9LCJpYXQiOjE2NTk5MjE3MTMsImV4cCI6MTY2MDAwODExM30.TolPpkkiXRTR6Bb5-didgqQLHYKjBIOuaRdCDl4MDvo';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI';
 
-// bloque de Eliminar Tarifa
-describe('Registros Eliminar', () => {
+// bloque de Eliminar Registro
+describe('Registro', () => {
     // primer escenario
-    it('Eliminar una registro válida', (done) => {
+    it('Eliminar una registro válido', (done) => {
         chai.request(url)
-            .delete('/registro/delete/18')
+            .delete('/registro/delete/9')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -23,7 +23,7 @@ describe('Registros Eliminar', () => {
     });
 
     // segundo escenario
-    it('Error al eliminar una tarifa no existente', (done) => {
+    it('Error al eliminar una registro no existente', (done) => {
         chai.request(url)
             .delete('/registro/delete/60')
             .set({ 'Authorization': `jwt ${token}` })
@@ -36,7 +36,7 @@ describe('Registros Eliminar', () => {
     });
 
     // tercer escenario
-    it('Error al querer eliminar una tarifa y no agregar id', (done) => {
+    it('Error al querer eliminar una registro y no agregar id', (done) => {
         chai.request(url)
             .delete('/registro/delete/a')
             .set({ 'Authorization': `jwt ${token}` })

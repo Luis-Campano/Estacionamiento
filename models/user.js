@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'El campo nombre solo accepta 40 caracteres.'
         },
         is: {
-          args: /^[a-zA-Z\u00C0-\u017F\s]+$/,
+          args: /^[a-zA-Z]+$/,
           msg: 'El campo, solo accepta texto.'
         }
       }

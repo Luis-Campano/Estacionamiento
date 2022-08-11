@@ -4,12 +4,12 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFsZ29AYWxnby5jb20iLCJyb2wiOiJzdXBlciJ9LCJpYXQiOjE2NTk5MzI1OTgsImV4cCI6MTY2MDAxODk5OH0.j7EIw3lucAg1VVf-QKT9Rr0Spvk8u-Oeefk2QSE6EEs';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI';
 
 // Bloque de Leer Cliente
 describe('Usuarios Leer', () => {
     // primer escenario
-    it('Leer un cliente válido', (done) => {
+    it('Leer un usuario válido', (done) => {
         chai.request(url)
             .get('/user/1')
             .set({ 'Authorization': `jwt ${token}` })
@@ -26,7 +26,7 @@ describe('Usuarios Leer', () => {
     });
 
     // segundo escenario
-    it('Error al leer un cliente no existente', (done) => {
+    it('Error al leer un usuario no existente', (done) => {
         chai.request(url)
             .get('/user/20')
             .set({ 'Authorization': `jwt ${token}` })
