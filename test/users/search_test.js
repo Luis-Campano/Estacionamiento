@@ -4,7 +4,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFsZ29AYWxnby5jb20iLCJyb2wiOiJzdXBlciJ9LCJpYXQiOjE2NjA0MDAwMjQsImV4cCI6MTY2MDQ4NjQyNH0.vHr0CR-nL0vufP8hUDljlGnHn9I-u_kpA8-Te9HNwFk';
 
 // bloque de Buscar Usuario
 describe('Registro Búscar', () => {
@@ -23,7 +23,7 @@ describe('Registro Búscar', () => {
     //segundo escenario
     it('Mostrar el mensaje "Sin resultados" cuando no se encuentre un usuario.', (done) => {
         chai.request(url)
-            .get('/search-user?q=z')
+            .get('/search-user?q=w')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

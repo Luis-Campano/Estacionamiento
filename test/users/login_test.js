@@ -12,8 +12,8 @@ describe('Autenticar usuario', () => {
         chai.request(url)
             .post('/login')
             .send({
-                 email: 'luis.campano.esp@gmail.com',
-                 password: 'luis19'
+                 email: 'algo@algo.com',
+                 password: '12345'
             })
             .end((error, response) => {
                 //validar lo que se escribio

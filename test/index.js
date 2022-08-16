@@ -1,5 +1,5 @@
 // Importar archivos de prueba
-
+/*
 // Módulo de Customer
 require('./customer/add_test');
 require('./customer/update_test');
@@ -43,7 +43,7 @@ require('./registration/search_test');
 
 // Módulo de Pago
 require('./payment/read_test');
-
+*/
 // Módulo de Usuario
 require('./users/read_test');
 require('./users/search_test');

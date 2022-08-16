@@ -90,8 +90,32 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   },
-  customerId: DataTypes.INTEGER,
-  typeVehicleId: DataTypes.INTEGER,
+  customerId: {
+    type: DataTypes.INTEGER,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg:'El ID del cliente, no puede quedar vacío.',
+      },
+      isNumeric:{
+        args: true,
+        msg: 'El campos ID cliente, solo acepta caracteres, numericos.',
+      },
+    }
+  }, 
+  typeVehicleId: {
+    type: DataTypes.INTEGER,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg:'El ID del tipo de vehículo, no puede quedar vacío.',
+      },
+      isNumeric:{
+        args: true,
+        msg: 'El campos ID tipo de Vehículo, solo acepta caracteres, numericos.',
+      },
+    }
+  } 
   }, {
     sequelize,
     modelName: 'Vehicle',
