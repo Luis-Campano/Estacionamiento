@@ -39,7 +39,19 @@ module.exports = (sequelize, DataTypes) => {
       }
       },
     },
-    rateId: DataTypes.INTEGER
+    rateId: {
+      type:DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg:'El ID de la tarifa, no puede quedar vacío.',
+        },
+        isNumeric:{
+          args: true,
+          msg: 'El campo ID tarifa, solo acepta caracteres, numericos.',
+        },
+      }
+    },
   }, {
     sequelize,
     modelName: 'Floor',

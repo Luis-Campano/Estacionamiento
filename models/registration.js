@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         isNumeric:{
           args: true,
-          msg: 'El campos ID Vehículo, solo acepta caracteres, numericos.',
+          msg: 'El campo ID Vehículo, solo acepta caracteres, numericos.',
         },
       }
     }

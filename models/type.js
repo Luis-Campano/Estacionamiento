@@ -35,7 +35,19 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    floorId:DataTypes.INTEGER
+    floorId: { 
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg:'El ID de la planta, no puede quedar vacío.',
+        },
+        isNumeric:{
+          args: true,
+          msg: 'El campo ID planta, solo acepta caracteres, numericos.',
+        },
+      }
+    }
   }, {
     sequelize,
     modelName: 'Type',
