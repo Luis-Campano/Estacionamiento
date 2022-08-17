@@ -4,9 +4,9 @@
   "description": "Servicio web para un estacionamiento",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha test/index.js",
+    "start": "node ./index.js",
     "dev": "nodemon ./index.js",
-    "start": "node ./index.js"
+    "test": "npx mocha test/index.js"
   },
   "repository": {
     "type": "git",
