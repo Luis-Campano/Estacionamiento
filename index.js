@@ -30,6 +30,9 @@ db.sequelize.authenticate()
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.send('Welcome to the API Estacionamiento Cuchao!');
+});
 
 // cors
 app.use(
