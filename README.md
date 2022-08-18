@@ -60,5 +60,3 @@ npm run dev
 ```
 Step 5: Go to browser
 Open [http://localhost:5000](http://localhost:5000) and take a look around.
-
-Ok.
