@@ -23,7 +23,8 @@ exports.notificationEmail = async (name, email) => {
     mensaje += 'Usted ha sido registrado al Estacionamiento "Cuchao"<br>';
     mensaje += '¡Gracias por confiar en nosotros!';
     let info = await transporter.sendMail({
-      from: 'Estacionamiento <sandra.salas19@utim.edu.mx>',// sender address
+        //your_email_smtp
+      from: 'Estacionamiento <sandra.salas19@utim.edu.mx>',//sender address your_email_smtp
       to: `${name}<${email}>`, // list of receivers: Juan Pérez<juan@algo.com>
       subject: "Bienvenido", // Subject line
       html: mensaje, // html body

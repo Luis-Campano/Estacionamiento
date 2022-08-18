@@ -21,7 +21,12 @@ const config = {
         database: process.env.DB_NAME,
         host: process.env.DB_HOST,
         dialect: process.env.DB_DIALECT
-    }
+    }/*
+    production: {
+        use_env_variable: process.env.CLEARDB_DATABASE_URL,
+        dialect: process.env.DB_DIALECT,
+        logging: true,
+    },*/
 };
 
 module.exports = config;

@@ -31,11 +31,16 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+//Mensajen en pantalla inicial
+app.get('/', (req, res) => {
+  res.send('Welcome to the API Estacionamiento, ¡Cuchao!');
+});
+
 // cors
 app.use(
     cors({
         credentials: true,
-        origin: ['http://localhost:5000'],
+        origin: ['*'],
     })
 );
 
@@ -46,7 +51,7 @@ app.use('/', passport.authenticate('jwt', { session: false }), routes());
 
 
 //Puerto de escuchar.
-app.listen(process.env.APP_PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log("El servidor esta, activo.");
 })
 // 
