@@ -1,10 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
+require('dotenv').config();
 
 chai.use(chaiHttp);
-const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFsZ29AYWxnby5jb20iLCJyb2wiOiJzdXBlciJ9LCJpYXQiOjE2NjA0MDAwMjQsImV4cCI6MTY2MDQ4NjQyNH0.vHr0CR-nL0vufP8hUDljlGnHn9I-u_kpA8-Te9HNwFk';
+const url = process.env.URL_ACCESS;
+const token = process.env.TOKEN_ACCESS;
 
 // bloque de Buscar Usuario
 describe('Registro Búscar', () => {

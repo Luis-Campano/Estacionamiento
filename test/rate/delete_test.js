@@ -2,10 +2,12 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const vehicle = require('../../models/vehicle');
 const expect = chai.expect;
+require('dotenv').config();
 
 chai.use(chaiHttp);
-const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI'
+const url = process.env.URL_ACCESS;
+const token = process.env.TOKEN_ACCESS;
+
 // bloque de Eliminar Tarifa
 describe('Tarifa', () => {
     // primer escenario

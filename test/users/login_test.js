@@ -1,9 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
+require('dotenv').config();
+
 
 chai.use(chaiHttp);
-const url = 'http://localhost:5000';
+const url = process.env.URL_ACCESS;
 
 // bloque de autenticar usuario
 describe('Autenticar usuario', () => {
