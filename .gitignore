@@ -1,24 +1,2 @@
 /node_modules
 .env
-
-#Variables de entorno.
-
-#Puerto de escucha
-NODE_ENV=development,production,test
-APP_PORT=your_port
-
-#Conexion BDgit
-DB_USER_NAME=root
-DB_USER_PWD=your?password
-DB_NAME=your?database
-DB_HOST=localhost
-DB_DIALECT=dialect(mysql)
-
-#Token de contraseña.
-TOKEN_SECRET=token_random
-
-#Variables para que se envie el correo al usuario y asi lo recupere
-SERVIDOR_SMTP=servicio_smtp
-USUARIO_SMTP=your_email_smtp
-PASSWORD_SMTP=your_password_smtp
-
