@@ -1,6 +1,6 @@
 # Estacionamiento
 Proyecto Cuatrimestral de un Estacionamiento
-Link del Tablero AzureDevOps https://dev.azure.com/sandrasalas19/Estacionamiento
+``Link del Tablero AzureDevOps https://dev.azure.com/sandrasalas19/Estacionamiento``
 ## Requirements
 * Node js
 * Git
@@ -10,12 +10,10 @@ Link del Tablero AzureDevOps https://dev.azure.com/sandrasalas19/Estacionamiento
 ## Common setup
 
 Step 1: Clone the repo and install the dependencies.
-
 ```bash
 git clone https://github.com/Luis-Campano/Estacionamiento.git
 cd Estacionamiento
 ```
-
 Step 2:
 ```bash
 npm install
