@@ -11,7 +11,7 @@ describe('Customer', () => {
     // primer escenario
     it('Actualizar un cliente válido', (done) => {
         chai.request(url)
-            .put('/customer/update/8')
+            .put('/customer/update/5')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
                 name: 'Luis Roberto',
@@ -53,7 +53,7 @@ describe('Customer', () => {
             .put('/customer/update/2')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                name: 'Luis Roberto',
+                name: 'Luis Roberto5',
                 lastName: 'Campano',
                 email: 'roberto.luis.campano',
                 phone: '000000',

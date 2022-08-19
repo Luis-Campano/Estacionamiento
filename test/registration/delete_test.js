@@ -12,7 +12,7 @@ describe('Registro', () => {
     // primer escenario
     it('Eliminar una registro válido', (done) => {
         chai.request(url)
-            .delete('/registro/delete/9')
+            .delete('/registro/delete/84')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -25,7 +25,7 @@ describe('Registro', () => {
     // segundo escenario
     it('Error al eliminar una registro no existente', (done) => {
         chai.request(url)
-            .delete('/registro/delete/60')
+            .delete('/registro/delete/1')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -42,7 +42,7 @@ describe('Registro', () => {
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
-                expect(response).to.have.status(500);
+                expect(response).to.have.status(404);
                 expect(response.body).to.have.property('message');
                 done();
             });

@@ -11,7 +11,7 @@ describe('Customer', () => {
     // primer escenario
     it('Leer un cliente válido', (done) => {
         chai.request(url)
-            .get('/customer/show/2')
+            .get('/customer/show/4')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

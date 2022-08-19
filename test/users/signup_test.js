@@ -14,9 +14,9 @@ describe('Crear un usuario', () => {
             .post('/signup')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                name: 'Sefesesso',
-                email: 'sefeesso@algo.com',
-                password: 'sasnsr190118c',
+                name: 'Motasss',
+                email: 'motasssss@algo.com',
+                password: 'mosstasr190118c',
             })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -32,7 +32,7 @@ describe('Crear un usuario', () => {
             .post('/signup')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                email: 'algo@algo.com',
+                email: 'motas@algo.com',
                 password: 'agfdsasdfg'
             })
             .end((error, response) => {

@@ -13,7 +13,7 @@ describe('Vehicle', () => {
     // primer escenario
     it('Eliminar un vehículo válido', (done) => {
         chai.request(url)
-            .delete('/vehiculo/delete/7')
+            .delete('/vehiculo/delete/34')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -43,7 +43,7 @@ describe('Vehicle', () => {
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
-                expect(response).to.have.status(500);
+                expect(response).to.have.status(404);
                 expect(response.body).to.have.property('message');
                 done();
             });

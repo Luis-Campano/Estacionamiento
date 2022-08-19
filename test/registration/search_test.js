@@ -12,7 +12,7 @@ describe('Registro Búscar', () => {
     //primer escenario
     it('Buscar una placa de vehículo existente.', (done) => {
         chai.request(url)
-            .get('/search-registrations?q=Ajidb12')
+            .get('/search-registrations?q=JKDS4')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

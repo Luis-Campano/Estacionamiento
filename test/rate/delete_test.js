@@ -13,7 +13,7 @@ describe('Tarifa', () => {
     // primer escenario
     it('Eliminar una tarifa válida', (done) => {
         chai.request(url)
-            .delete('/tarifa/delete/5')
+            .delete('/tarifa/delete/44')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -43,7 +43,7 @@ describe('Tarifa', () => {
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
-                expect(response).to.have.status(500);
+                expect(response).to.have.status(404);
                 expect(response.body).to.have.property('message');
                 done();
             });

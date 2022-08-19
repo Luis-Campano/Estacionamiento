@@ -13,7 +13,7 @@ describe('Vehicle', () => {
     //primer escenario
     it('Buscar un vehículo existente', (done) => {
         chai.request(url)
-            .get('/vehiculos/search?q=Rolls Royce')
+            .get('/vehiculos/search?q=JKDS4')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

@@ -1,5 +1,5 @@
 const chai = require('chai');
-const chaihttp = require('chai-http');
+const chaiHttp = require('chai-http');
 const expect = chai.expect;
 require('dotenv').config();
 
@@ -13,7 +13,7 @@ describe('Leer planta', () => {
         //primer escenario
         it('Debe leer una planta valida', (done) => {
             chai.request(url)
-            .get('/planta/2')
+            .get('/planta/4')
             .set({'Authorization': `jwt ${token}`})
             .end((error, response) => {
                 //validar lo que se escribio

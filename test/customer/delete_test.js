@@ -12,7 +12,7 @@ describe('Customer', () => {
     // primer escenario
     it('Eliminar un cliente válido', (done) => {
         chai.request(url)
-            .delete('/customer/delete/14')
+            .delete('/customer/delete/25')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -42,7 +42,7 @@ describe('Customer', () => {
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
-                expect(response).to.have.status(500);
+                expect(response).to.have.status(404);
                 expect(response.body).to.have.property('message');
                 done();
             });

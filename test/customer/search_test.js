@@ -12,7 +12,7 @@ describe('Customer', () => {
     //primer escenario
     it('Buscar un cliente válido', (done) => {
         chai.request(url)
-            .get('/customer/search?q=San')
+            .get('/customer/search?q=Juan')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -24,7 +24,7 @@ describe('Customer', () => {
     //segundo escenario
     it('Mostrar el mensaje "Sin resultados" cuando no se encuentre un cliente', (done) => {
         chai.request(url)
-            .get('/customer/search?q=W')
+            .get('/customer/search?q=wa')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

@@ -12,7 +12,7 @@ describe('Usuarios Leer', () => {
     // primer escenario
     it('Leer un usuario válido', (done) => {
         chai.request(url)
-            .get('/user/1')
+            .get('/user/2')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

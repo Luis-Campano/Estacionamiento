@@ -1,5 +1,5 @@
 const chai = require('chai');
-const chaihttp = require('chai-http');
+const chaiHttp = require('chai-http');
 const expect = chai.expect;
 require('dotenv').config();
 
@@ -13,10 +13,10 @@ describe('Actualizacion de Tipo de vehiculo', () => {
         //primer escenario:actualizar un tipo de vehiculo valido
         it('Debe actualizar un tipo de vehiculo valido', (done) => {
             chai.request(url)
-            .put('/tipo_vehiculo/update/3')
+            .put('/tipo_vehiculo/update/14')
             .set({'Authorization': `jwt ${token}`})
             .send({
-                typeVehicle: 'motoneta',
+                typeVehicle: 'motonetass',
                 floorId: 1,
             })
             .end((error, response) => {

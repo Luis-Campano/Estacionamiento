@@ -15,7 +15,7 @@ describe('Registro', () => {
             .post('/registro')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                vehicleId: 8,
+                vehicleId: 5,
             })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -32,7 +32,7 @@ describe('Registro', () => {
             .post('/registro')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                vehicleId:6 
+                vehicleId:7 
             })
             .end((error, response) => {
                 //validar lo que se escribio

@@ -6,7 +6,8 @@ require('dotenv').config();
 
 chai.use(chaiHttp);
 const url = process.env.URL_ACCESS;
-const token = process.env.TOKEN_ACCESS;// bloque de Agregar Cliente
+const token = process.env.TOKEN_ACCESS;
+// bloque de Agregar Cliente
 describe('Customer', () => {
     // primer escenario
     it('Agregar un nuevo cliente válido', (done) => {
@@ -14,10 +15,10 @@ describe('Customer', () => {
             .post('/customer')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                name: 'Juan',
-                lastName: 'Guzman',
-                email: 'juan.mancito@gmail.com',
-                phone: '7351234567',
+                name: 'Steve sssES',
+                lastName: 'algosss ALGL',
+                email: 'steveaslsg@gmail.com',
+                phone: '2433518952',
             })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -35,9 +36,9 @@ describe('Customer', () => {
             .set({ 'Authorization': `jwt ${token}` })
             .send({
                 name: '',
-                lastName: 'Guzman',
-                email: 'juan.guzman@gmail.com',
-                phone: '7351234567',
+                lastName: '',
+                email: 'algo@gmail.com',
+                phone: '2431518952',
             })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -54,7 +55,7 @@ describe('Customer', () => {
             .post('/customer')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                name: 'Juan',
+                name: 'Juan4',
                 lastName: 'Guzman',
                 email: 'juan.guzman@gmail',
                 phone: '73512345678099',

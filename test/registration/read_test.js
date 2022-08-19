@@ -12,7 +12,7 @@ describe('Registro', () => {
     // primer escenario
     it('Leer un registro', (done) => {
         chai.request(url)
-            .get('/registro/show/6')
+            .get('/registro/show/4')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

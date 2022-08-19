@@ -13,11 +13,11 @@ describe('Tarifa', () => {
     // primer escenario
     it('Actualizar una tarifa válida', (done) => {
         chai.request(url)
-            .put('/tarifa/update/6')
+            .put('/tarifa/update/2')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                type: 'Alta',
-                quota: 20,
+                type: 'motosss',
+                quota: 25,
             })
             .end((error, response) => {
                 //validar lo que se escribio

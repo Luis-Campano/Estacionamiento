@@ -15,12 +15,12 @@ describe('Vehicle', () => {
             .post('/vehiculo')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                lincesPlate: 'Abcdj34',
-                brand: 'Rolls Royce',
-                model: 'Phantom Orchid',
-                color: 'White',
+                lincesPlate: 'JKSS45',
+                brand: 'Rolls RED',
+                model: 'Phantom red',
+                color: 'Red',
                 customerId: 2,
-                typeVehicleId: 1
+                typeVehicleId: 4
             })
             .end((error, response) => {
                 //validar lo que se escribio

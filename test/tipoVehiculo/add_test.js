@@ -1,5 +1,5 @@
 const chai = require('chai');
-const chaihttp = require('chai-http');
+const chaiHttp = require('chai-http');
 const expect = chai.expect;
 require('dotenv').config();
 
@@ -16,8 +16,8 @@ describe('Registro de Tipo de vehiculo', () => {
             .post('/tipo_vehiculo')
             .set({'Authorization': `jwt ${token}`})
             .send({
-                typeVehicle: 'carro',
-                floorId: 2,
+                typeVehicle: 'sport',
+                floorId: 1,
             })
             .end((error, response) => {
                 //validar lo que se escribio

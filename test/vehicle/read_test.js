@@ -12,7 +12,7 @@ describe('Vehicle', () => {
     // primer escenario
     it('Leer un vehículo', (done) => {
         chai.request(url)
-            .get('/vehiculo/show/8')
+            .get('/vehiculo/show/5')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

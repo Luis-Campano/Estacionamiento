@@ -1,5 +1,5 @@
 const chai = require('chai');
-const chaihttp = require('chai-http');
+const chaiHttp = require('chai-http');
 const expect = chai.expect;
 require('dotenv').config();
 
@@ -13,7 +13,7 @@ describe('Eliminar planta', () => {
         //primer escenario: 
         it('Debe eliminar una planta', (done) => {
             chai.request(url)
-            .delete('/planta/delete/3')
+            .delete('/planta/delete/74')
             .set({'Authorization': `jwt ${token}`})
             .end((error, response) => {
                 //validar lo que se escribio
@@ -43,7 +43,7 @@ describe('Eliminar planta', () => {
             .delete('/planta/delete/a')
             .set({'Authorization': `jwt ${token}`})
             .end((error, response) => {
-                expect(response).to.have.status(400);
+                expect(response).to.have.status(404);
                 expect(response.body).to.have.property('message');
                 done();
             });

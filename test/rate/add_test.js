@@ -15,7 +15,7 @@ describe('Tarifa', () => {
             .post('/tarifa')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                type: 'Alta',
+                type: 'Alta de alat',
                 quota: 15,
                 tolerance: 20, // minutos
             })

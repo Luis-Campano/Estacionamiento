@@ -12,7 +12,7 @@ describe('Tarifa', () => {
     // primer escenario
     it('Leer una tarifa', (done) => {
         chai.request(url)
-            .get('/tarifa/5')
+            .get('/tarifa/1')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio
