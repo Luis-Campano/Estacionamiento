@@ -1,11 +1,11 @@
 const chai = require('chai');
-const chaihttp = require('chai-http');
+const chaiHttp = require('chai-http');
 const expect = chai.expect;
+require('dotenv').config();
 
-chai.use(chaihttp);
-const url = 'http://localhost:5000';
-
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI'
+chai.use(chaiHttp);
+const url = process.env.URL_ACCESS;
+const token = process.env.TOKEN_ACCESS;
 
 describe('Eliminar planta', () => {
 
@@ -13,7 +13,7 @@ describe('Eliminar planta', () => {
         //primer escenario: 
         it('Debe eliminar una planta', (done) => {
             chai.request(url)
-            .delete('/planta/delete/3')
+            .delete('/planta/delete/74')
             .set({'Authorization': `jwt ${token}`})
             .end((error, response) => {
                 //validar lo que se escribio
@@ -43,7 +43,7 @@ describe('Eliminar planta', () => {
             .delete('/planta/delete/a')
             .set({'Authorization': `jwt ${token}`})
             .end((error, response) => {
-                expect(response).to.have.status(400);
+                expect(response).to.have.status(404);
                 expect(response.body).to.have.property('message');
                 done();
             });

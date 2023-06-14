@@ -1,17 +1,18 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
+require('dotenv').config();
 
 chai.use(chaiHttp);
-const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFsZ29AYWxnby5jb20iLCJyb2wiOiJzdXBlciJ9LCJpYXQiOjE2NjA0MzcyNzcsImV4cCI6MTY2MDUyMzY3N30.qhSF7cSR9yRCuxYeNgP1LiNujgfuELTQHHsMENci8nA';
+const url = process.env.URL_ACCESS;
+const token = process.env.TOKEN_ACCESS;
 
 // Bloque de Leer Cliente
 describe('Usuarios Leer', () => {
     // primer escenario
     it('Leer un usuario válido', (done) => {
         chai.request(url)
-            .get('/user/1')
+            .get('/user/2')
             .set({ 'Authorization': `jwt ${token}` })
             .end((error, response) => {
                 //validar lo que se escribio

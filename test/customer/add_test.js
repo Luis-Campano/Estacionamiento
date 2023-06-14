@@ -1,10 +1,12 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
+require('dotenv').config();
+
 
 chai.use(chaiHttp);
-const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6Imx1aXMuY2FtcGFuby5lc3BAZ21haWwuY29tIiwicm9sIjoic3VwZXIifSwiaWF0IjoxNjYwMDgzMzI1LCJleHAiOjE2NjAzNDI1MjV9.cPI-pERsBVa0FI0pAYVBUq5LPJW1HUVptBH8ZVpJfPI';
+const url = process.env.URL_ACCESS;
+const token = process.env.TOKEN_ACCESS;
 // bloque de Agregar Cliente
 describe('Customer', () => {
     // primer escenario
@@ -13,10 +15,10 @@ describe('Customer', () => {
             .post('/customer')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                name: 'Juan',
-                lastName: 'Guzman',
-                email: 'juan.mancito@gmail.com',
-                phone: '7351234567',
+                name: 'Steve sssES',
+                lastName: 'algosss ALGL',
+                email: 'steveaslsg@gmail.com',
+                phone: '2433518952',
             })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -34,9 +36,9 @@ describe('Customer', () => {
             .set({ 'Authorization': `jwt ${token}` })
             .send({
                 name: '',
-                lastName: 'Guzman',
-                email: 'juan.guzman@gmail.com',
-                phone: '7351234567',
+                lastName: '',
+                email: 'algo@gmail.com',
+                phone: '2431518952',
             })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -53,7 +55,7 @@ describe('Customer', () => {
             .post('/customer')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                name: 'Juan',
+                name: 'Juan4',
                 lastName: 'Guzman',
                 email: 'juan.guzman@gmail',
                 phone: '73512345678099',

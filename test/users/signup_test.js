@@ -1,10 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
+require('dotenv').config();
 
 chai.use(chaiHttp);
-const url = 'http://localhost:5000';
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6ImFsZ29AYWxnby5jb20iLCJyb2wiOiJzdXBlciJ9LCJpYXQiOjE2NjA0MzcyNzcsImV4cCI6MTY2MDUyMzY3N30.qhSF7cSR9yRCuxYeNgP1LiNujgfuELTQHHsMENci8nA';
+const url = process.env.URL_ACCESS;
+const token = process.env.TOKEN_ACCESS;
 
 describe('Crear un usuario', () => {
     // primer caso: registrar
@@ -13,9 +14,9 @@ describe('Crear un usuario', () => {
             .post('/signup')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                name: 'Sefesesso',
-                email: 'sefeesso@algo.com',
-                password: 'sasnsr190118c',
+                name: 'Motasss',
+                email: 'motasssss@algo.com',
+                password: 'mosstasr190118c',
             })
             .end((error, response) => {
                 //validar lo que se escribio
@@ -31,7 +32,7 @@ describe('Crear un usuario', () => {
             .post('/signup')
             .set({ 'Authorization': `jwt ${token}` })
             .send({
-                email: 'algo@algo.com',
+                email: 'motas@algo.com',
                 password: 'agfdsasdfg'
             })
             .end((error, response) => {
